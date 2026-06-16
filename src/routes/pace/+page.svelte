@@ -87,7 +87,7 @@
 
 	{#if paceTable}
 		<!-- Zone pace table -->
-		<div class="mb-6 overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-700">
+		<div class="mb-4 overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-700">
 			<table class="min-w-full text-sm">
 				<thead class="bg-zinc-50 dark:bg-zinc-800">
 					<tr>
@@ -111,26 +111,28 @@
 							{/each}
 						</tr>
 					{/each}
+					{#if repPaces && (repPaces.rep200m || repPaces.rep400m)}
+						<tr class="hover:bg-zinc-50 dark:hover:bg-zinc-900">
+							<td class="whitespace-nowrap px-3 py-2.5">
+								<span class="font-medium text-zinc-800 dark:text-zinc-200">Speed</span>
+								<span class="ml-1.5 text-xs text-zinc-400">Rep</span>
+							</td>
+							{#each WORKOUT_DISTANCES as d}
+								<td class="px-3 py-2.5 text-center font-mono text-xs text-zinc-700 dark:text-zinc-300">
+									{d.label === '200m'
+										? (repPaces.rep200m ?? '—')
+										: d.label === '400m'
+											? (repPaces.rep400m ?? '—')
+											: '—'}
+								</td>
+							{/each}
+						</tr>
+					{/if}
 				</tbody>
 			</table>
 		</div>
 
-		<!-- Repetition paces (speed work) -->
-		{#if repPaces && (repPaces.rep200m || repPaces.rep400m)}
-			<div class="rounded-xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-700 dark:bg-zinc-900">
-				<h2 class="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">Speed / Repetition</h2>
-				<div class="flex gap-6 font-mono text-sm text-zinc-700 dark:text-zinc-300">
-					{#if repPaces.rep200m}
-						<span><span class="text-xs text-zinc-400">200m</span> {repPaces.rep200m}</span>
-					{/if}
-					{#if repPaces.rep400m}
-						<span><span class="text-xs text-zinc-400">400m</span> {repPaces.rep400m}</span>
-					{/if}
-				</div>
-			</div>
-		{/if}
-
-		<p class="mt-3 text-xs text-zinc-400">Times shown per distance. For distances >= 1k: min:sec/km.</p>
+		<p class="mt-3 text-xs text-zinc-400">Times shown per distance. For distances ≥ 1k: min:sec/km.</p>
 	{:else}
 		<div class="rounded-xl border border-dashed border-zinc-300 py-12 text-center dark:border-zinc-700">
 			<p class="text-sm text-zinc-400">Enter at least one reference time to see your training paces.</p>
