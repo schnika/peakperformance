@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
 	import { buildCalendarGrid, nextMonth, prevMonth } from '$lib/domain/calendar';
 	import {
 		SESSION_TYPE_COLORS,
@@ -111,14 +110,14 @@
 
 	<!-- Day names -->
 	<div class="mb-1 grid grid-cols-7 gap-px">
-		{#each DAY_NAMES as d}
+		{#each DAY_NAMES as d (d)}
 			<div class="py-1 text-center text-xs font-medium text-zinc-400">{d}</div>
 		{/each}
 	</div>
 
 	<!-- Calendar grid -->
 	<div class="grid grid-cols-7 gap-px bg-zinc-200 dark:bg-zinc-800">
-		{#each calendarDays as cell}
+		{#each calendarDays as cell (cell.date ?? cell.day)}
 			<div
 				class="min-h-[80px] bg-white p-1 dark:bg-zinc-950
 					{cell.date === today ? 'ring-2 ring-inset ring-zinc-900 dark:ring-zinc-100' : ''}"
@@ -127,7 +126,7 @@
 					<span class="mb-1 block text-xs font-medium text-zinc-400 dark:text-zinc-500">
 						{cell.day}
 					</span>
-					{#each cell.sessions as session}
+					{#each cell.sessions as session (session.id)}
 						<button
 							onclick={() => openDrawer(session)}
 							class="mb-1 flex w-full items-start gap-1 rounded px-1 py-0.5 text-left hover:bg-zinc-50 dark:hover:bg-zinc-900"
@@ -223,13 +222,13 @@
 					</div>
 				{/if}
 
-				{#each selectedDesc.sets as set}
+				{#each selectedDesc.sets as set (set.label)}
 					<div>
 						<h3 class="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-400">
 							{set.label}
 						</h3>
 						<ul class="space-y-1.5">
-							{#each set.blocks as block}
+							{#each set.blocks as block, i (i)}
 								<li
 									class="rounded-lg bg-zinc-50 px-3 py-2 text-sm text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
 								>

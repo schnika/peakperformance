@@ -32,6 +32,8 @@ export default defineConfig(
 		}
 	},
 	{
-		rules: {}
+		rules: {
+			'svelte/no-navigation-without-resolve': 'off'
+		}
 	}
 );

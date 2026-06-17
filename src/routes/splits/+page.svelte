@@ -111,7 +111,7 @@
 		<div>
 			<p class="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">Distance</p>
 			<div class="flex flex-wrap gap-2">
-				{#each REFERENCE_DISTANCES as d}
+				{#each REFERENCE_DISTANCES as d (d.label)}
 					<button
 						onclick={() => (distanceLabel = d.label)}
 						class="rounded-lg px-3 py-1.5 text-sm font-medium transition-colors
@@ -146,7 +146,7 @@
 		<div>
 			<p class="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">Strategy</p>
 			<div class="flex gap-2">
-				{#each [['even', 'Even'], ['negative', 'Negative split']] as [val, label]}
+				{#each [['even', 'Even'], ['negative', 'Negative split']] as [val, label] (val)}
 					<button
 						onclick={() => (strategy = val as SplitStrategy)}
 						class="rounded-lg px-3 py-1.5 text-sm font-medium transition-colors
@@ -204,7 +204,7 @@
 					</tr>
 				</thead>
 				<tbody class="divide-y divide-zinc-100 dark:divide-zinc-800">
-					{#each splits as s}
+					{#each splits as s (s.label)}
 						<tr class="hover:bg-zinc-50 dark:hover:bg-zinc-900">
 							<td class="px-4 py-2.5 text-zinc-700 dark:text-zinc-300">{s.label}</td>
 							<td class="px-4 py-2.5 text-right font-mono text-zinc-800 dark:text-zinc-200"
@@ -241,7 +241,7 @@
 						</tr>
 					</thead>
 					<tbody class="divide-y divide-zinc-100 dark:divide-zinc-800">
-						{#each lapSplits as s}
+						{#each lapSplits as s (s.label)}
 							<tr class="hover:bg-zinc-50 dark:hover:bg-zinc-900">
 								<td class="px-4 py-2.5 text-zinc-700 dark:text-zinc-300">{s.label}</td>
 								<td class="px-4 py-2.5 text-right font-mono text-zinc-800 dark:text-zinc-200"

@@ -28,7 +28,7 @@
 		class="fixed bottom-0 left-0 right-0 z-50 border-t border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950"
 	>
 		<div class="flex">
-			{#each tabs as tab}
+			{#each tabs as tab (tab.href)}
 				<a
 					href={tab.href}
 					class="flex flex-1 flex-col items-center gap-1 px-2 py-3 text-xs font-medium transition-colors
