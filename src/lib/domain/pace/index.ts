@@ -45,15 +45,14 @@ const VDOT_MAX = 85;
  * Calculates VDOT from a race performance using the Jack Daniels formula.
  */
 export function calculateVDOT(distanceMeters: number, timeSeconds: number): number {
-	if (distanceMeters <= 0 || timeSeconds <= 0) throw new Error('Distance and time must be positive');
+	if (distanceMeters <= 0 || timeSeconds <= 0)
+		throw new Error('Distance and time must be positive');
 
 	const minutes = timeSeconds / 60;
 	const velocity = distanceMeters / minutes; // meters per minute
 
 	const pct =
-		0.8 +
-		0.1894393 * Math.exp(-0.012778 * minutes) +
-		0.2989558 * Math.exp(-0.1932605 * minutes);
+		0.8 + 0.1894393 * Math.exp(-0.012778 * minutes) + 0.2989558 * Math.exp(-0.1932605 * minutes);
 
 	return (-4.6 + 0.182258 * velocity + 0.000104 * velocity * velocity) / pct;
 }
@@ -156,9 +155,12 @@ export function getZonePaces(vdot: number): ZonePaces[] {
 	const k = key(vdot);
 
 	const easyPace = kmPaceToSecPerKm((EASY_LONG_PACE as Record<string, { km: string }>)[k]?.km) ?? 0;
-	const marathonPace = kmPaceToSecPerKm((MARATHON_PACES as Record<string, { km: string }>)[k]?.km) ?? 0;
-	const thresholdPace = kmPaceToSecPerKm((THRESHOLD_PACES as Record<string, { km: string }>)[k]?.km) ?? 0;
-	const intervalPace = kmPaceToSecPerKm((INTERVAL_PACES as Record<string, { km: string }>)[k]?.km) ?? 0;
+	const marathonPace =
+		kmPaceToSecPerKm((MARATHON_PACES as Record<string, { km: string }>)[k]?.km) ?? 0;
+	const thresholdPace =
+		kmPaceToSecPerKm((THRESHOLD_PACES as Record<string, { km: string }>)[k]?.km) ?? 0;
+	const intervalPace =
+		kmPaceToSecPerKm((INTERVAL_PACES as Record<string, { km: string }>)[k]?.km) ?? 0;
 
 	return [
 		{ zone: 'zone1', paceSecPerKm: easyPace + 45 },
@@ -173,7 +175,10 @@ export function getZonePaces(vdot: number): ZonePaces[] {
  * Returns the 200m and 400m repetition times from the Daniels table for a given VDOT.
  * Useful for speed/rep work that goes beyond zone5.
  */
-export function getRepetitionPaces(vdot: number): { rep200m: string | null; rep400m: string | null } {
+export function getRepetitionPaces(vdot: number): {
+	rep200m: string | null;
+	rep400m: string | null;
+} {
 	const k = key(vdot);
 	const row = (REPETITION_PACES as Record<string, { '200m': string; '400m': string }>)[k];
 	return { rep200m: row?.['200m'] ?? null, rep400m: row?.['400m'] ?? null };
