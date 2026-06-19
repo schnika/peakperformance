@@ -46,6 +46,12 @@ export interface SessionDescription {
 	cooldown?: CooldownBlock;
 }
 
+export interface SessionVariation {
+	label: string;
+	description: SessionDescription;
+	notes?: string;
+}
+
 export interface TrainingSession {
 	id: number;
 	date: string;
@@ -54,6 +60,7 @@ export interface TrainingSession {
 	priority: number;
 	description: SessionDescription;
 	notes: string | null;
+	variations: SessionVariation[];
 	createdAt: Date | null;
 }
 

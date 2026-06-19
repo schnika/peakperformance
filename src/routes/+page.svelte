@@ -31,7 +31,23 @@
 
 	let selectedSession = $state<TrainingSession | null>(null);
 	let drawerOpen = $state(false);
-	const selectedDesc = $derived(selectedSession?.description as SessionDescription | null);
+	let selectedVariationIndex = $state<number | null>(null); // null = base
+
+	const activeDesc = $derived.by((): SessionDescription | null => {
+		if (!selectedSession) return null;
+		if (selectedVariationIndex !== null && selectedSession.variations?.length > 0) {
+			return selectedSession.variations[selectedVariationIndex]?.description ?? null;
+		}
+		return selectedSession.description as SessionDescription | null;
+	});
+
+	const activeNotes = $derived.by((): string | null => {
+		if (!selectedSession) return null;
+		if (selectedVariationIndex !== null && selectedSession.variations?.length > 0) {
+			return selectedSession.variations[selectedVariationIndex]?.notes ?? null;
+		}
+		return selectedSession.notes;
+	});
 
 	function navigate(delta: number) {
 		const { year, month } =
@@ -41,6 +57,7 @@
 
 	function openDrawer(session: TrainingSession) {
 		selectedSession = session;
+		selectedVariationIndex = null;
 		drawerOpen = true;
 	}
 
@@ -135,8 +152,22 @@
 								class="mt-1 h-2 w-2 flex-shrink-0 rounded-full {SESSION_TYPE_COLORS[session.type]}"
 							></span>
 							<div class="min-w-0 flex-1">
-								<p class="truncate text-xs font-medium text-zinc-800 dark:text-zinc-200">
-									{session.title}
+								<p
+									class="flex items-center gap-1 truncate text-xs font-medium text-zinc-800 dark:text-zinc-200"
+								>
+									<span class="truncate">{session.title}</span>
+									{#if session.variations?.length > 0}
+										<svg
+											class="h-3 w-3 flex-shrink-0 text-zinc-400"
+											viewBox="0 0 16 16"
+											fill="currentColor"
+											aria-label="{session.variations.length} variations"
+										>
+											<rect x="1" y="1" width="14" height="3" rx="1" />
+											<rect x="1" y="6" width="14" height="3" rx="1" opacity="0.6" />
+											<rect x="1" y="11" width="14" height="3" rx="1" opacity="0.3" />
+										</svg>
+									{/if}
 								</p>
 								<p class="text-[10px] text-zinc-400">
 									{priorityDots(session.priority)}
@@ -185,6 +216,34 @@
 			</button>
 		</div>
 
+		<!-- Variation tabs -->
+		{#if selectedSession.variations?.length > 0}
+			<div class="border-b border-zinc-200 px-4 dark:border-zinc-700">
+				<div class="flex gap-0 overflow-x-auto">
+					<button
+						onclick={() => (selectedVariationIndex = null)}
+						class="flex-shrink-0 border-b-2 px-3 py-2 text-xs font-medium transition-colors
+							{selectedVariationIndex === null
+							? 'border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100'
+							: 'border-transparent text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}"
+					>
+						Base
+					</button>
+					{#each selectedSession.variations as variation, i (variation.label)}
+						<button
+							onclick={() => (selectedVariationIndex = i)}
+							class="flex-shrink-0 border-b-2 px-3 py-2 text-xs font-medium transition-colors
+								{selectedVariationIndex === i
+								? 'border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100'
+								: 'border-transparent text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}"
+						>
+							{variation.label}
+						</button>
+					{/each}
+				</div>
+			</div>
+		{/if}
+
 		<div class="flex-1 space-y-5 px-4 py-4">
 			<!-- Type + priority -->
 			<div class="flex items-center gap-3">
@@ -208,21 +267,21 @@
 			</div>
 
 			<!-- Description -->
-			{#if selectedDesc}
-				{#if selectedDesc.warmup}
+			{#if activeDesc}
+				{#if activeDesc.warmup}
 					<div>
 						<h3 class="mb-1.5 text-xs font-semibold uppercase tracking-wide text-zinc-400">
 							Warm-up
 						</h3>
 						<p class="text-sm text-zinc-700 dark:text-zinc-300">
-							{selectedDesc.warmup.duration}{selectedDesc.warmup.notes
-								? ` — ${selectedDesc.warmup.notes}`
+							{activeDesc.warmup.duration}{activeDesc.warmup.notes
+								? ` — ${activeDesc.warmup.notes}`
 								: ''}
 						</p>
 					</div>
 				{/if}
 
-				{#each selectedDesc.sets as set (set.label)}
+				{#each activeDesc.sets as set (set.label)}
 					<div>
 						<h3 class="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-400">
 							{set.label}
@@ -239,14 +298,14 @@
 					</div>
 				{/each}
 
-				{#if selectedDesc.cooldown}
+				{#if activeDesc.cooldown}
 					<div>
 						<h3 class="mb-1.5 text-xs font-semibold uppercase tracking-wide text-zinc-400">
 							Cool-down
 						</h3>
 						<p class="text-sm text-zinc-700 dark:text-zinc-300">
-							{selectedDesc.cooldown.duration}{selectedDesc.cooldown.notes
-								? ` — ${selectedDesc.cooldown.notes}`
+							{activeDesc.cooldown.duration}{activeDesc.cooldown.notes
+								? ` — ${activeDesc.cooldown.notes}`
 								: ''}
 						</p>
 					</div>
@@ -254,10 +313,10 @@
 			{/if}
 
 			<!-- Notes -->
-			{#if selectedSession.notes}
+			{#if activeNotes}
 				<div>
 					<h3 class="mb-1.5 text-xs font-semibold uppercase tracking-wide text-zinc-400">Notes</h3>
-					<p class="text-sm text-zinc-700 dark:text-zinc-300">{selectedSession.notes}</p>
+					<p class="text-sm text-zinc-700 dark:text-zinc-300">{activeNotes}</p>
 				</div>
 			{/if}
 		</div>
