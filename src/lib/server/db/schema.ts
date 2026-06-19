@@ -8,6 +8,6 @@ export const trainingSessions = pgTable('training_sessions', {
 	priority: integer('priority').notNull().default(2),
 	description: jsonb('description').notNull().default({}),
 	notes: text('notes'),
-	variations: jsonb('variations').notNull().default([]),
+	variations: jsonb('variations').default([]),
 	createdAt: timestamp('created_at').defaultNow()
 });
