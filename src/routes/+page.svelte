@@ -7,7 +7,6 @@
 		ZONE_LABELS,
 		type TrainingSession,
 		type SessionDescription,
-		type SessionVariation,
 		type Block
 	} from '$lib/types';
 	import { describeBlock } from '$lib/domain/session';
