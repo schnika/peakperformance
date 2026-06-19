@@ -77,13 +77,13 @@ Table: `training_sessions`
 
 ### Zone Vocabulary
 
-| Zone    | Name         | RPE |
-| ------- | ------------ | --- |
-| `zone1` | Recovery     | 1–4 |
-| `zone2` | Aerobic      | 5–6 |
-| `zone3` | Steady State | 7   |
-| `zone4` | Threshold    | 8–9 |
-| `zone5` | VO2max       | 10  |
+| Zone    | Name         | RPE  |
+| ------- | ------------ | ---- |
+| `zone1` | Recovery     | 1–2  |
+| `zone2` | Aerobic      | 3–4  |
+| `zone3` | Steady State | 5–6  |
+| `zone4` | Threshold    | 7–8  |
+| `zone5` | VO2max       | 9–10 |
 
 ### `description` JSONB Schema
 
