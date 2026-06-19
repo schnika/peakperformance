@@ -153,13 +153,20 @@
 								class="mt-1 h-2 w-2 flex-shrink-0 rounded-full {SESSION_TYPE_COLORS[session.type]}"
 							></span>
 							<div class="min-w-0 flex-1">
-								<p class="flex items-center gap-1 truncate text-xs font-medium text-zinc-800 dark:text-zinc-200">
+								<p
+									class="flex items-center gap-1 truncate text-xs font-medium text-zinc-800 dark:text-zinc-200"
+								>
 									<span class="truncate">{session.title}</span>
 									{#if session.variations?.length > 0}
-										<svg class="h-3 w-3 flex-shrink-0 text-zinc-400" viewBox="0 0 16 16" fill="currentColor" aria-label="{session.variations.length} variations">
-											<rect x="1" y="1" width="14" height="3" rx="1"/>
-											<rect x="1" y="6" width="14" height="3" rx="1" opacity="0.6"/>
-											<rect x="1" y="11" width="14" height="3" rx="1" opacity="0.3"/>
+										<svg
+											class="h-3 w-3 flex-shrink-0 text-zinc-400"
+											viewBox="0 0 16 16"
+											fill="currentColor"
+											aria-label="{session.variations.length} variations"
+										>
+											<rect x="1" y="1" width="14" height="3" rx="1" />
+											<rect x="1" y="6" width="14" height="3" rx="1" opacity="0.6" />
+											<rect x="1" y="11" width="14" height="3" rx="1" opacity="0.3" />
 										</svg>
 									{/if}
 								</p>
@@ -218,8 +225,8 @@
 						onclick={() => (selectedVariationIndex = null)}
 						class="flex-shrink-0 border-b-2 px-3 py-2 text-xs font-medium transition-colors
 							{selectedVariationIndex === null
-								? 'border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100'
-								: 'border-transparent text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}"
+							? 'border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100'
+							: 'border-transparent text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}"
 					>
 						Base
 					</button>
@@ -228,8 +235,8 @@
 							onclick={() => (selectedVariationIndex = i)}
 							class="flex-shrink-0 border-b-2 px-3 py-2 text-xs font-medium transition-colors
 								{selectedVariationIndex === i
-									? 'border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100'
-									: 'border-transparent text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}"
+								? 'border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100'
+								: 'border-transparent text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}"
 						>
 							{variation.label}
 						</button>
