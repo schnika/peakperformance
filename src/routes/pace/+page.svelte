@@ -112,7 +112,7 @@
 								>
 								<span class="ml-1.5 text-xs text-zinc-400">RPE {row.zoneLabel.rpe}</span>
 							</td>
-							{#each row.distances as cell (cell.label)}
+							{#each row.distances as cell (`${row.zone}-${cell.label}`)}
 								<td
 									class="px-3 py-2.5 text-center font-mono text-xs text-zinc-700 dark:text-zinc-300"
 								>
