@@ -60,7 +60,7 @@ export interface TrainingSession {
 	priority: number;
 	description: SessionDescription;
 	notes: string | null;
-	variations: SessionVariation[];
+	variations?: SessionVariation[];
 	createdAt: Date | null;
 }
 

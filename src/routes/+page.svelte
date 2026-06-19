@@ -35,16 +35,16 @@
 
 	const activeDesc = $derived.by((): SessionDescription | null => {
 		if (!selectedSession) return null;
-		if (selectedVariationIndex !== null && selectedSession.variations?.length > 0) {
-			return selectedSession.variations[selectedVariationIndex]?.description ?? null;
+		if (selectedVariationIndex !== null && (selectedSession.variations?.length ?? 0) > 0) {
+			return selectedSession.variations?.[selectedVariationIndex]?.description ?? null;
 		}
 		return selectedSession.description as SessionDescription | null;
 	});
 
 	const activeNotes = $derived.by((): string | null => {
 		if (!selectedSession) return null;
-		if (selectedVariationIndex !== null && selectedSession.variations?.length > 0) {
-			return selectedSession.variations[selectedVariationIndex]?.notes ?? null;
+		if (selectedVariationIndex !== null && (selectedSession.variations?.length ?? 0) > 0) {
+			return selectedSession.variations?.[selectedVariationIndex]?.notes ?? null;
 		}
 		return selectedSession.notes;
 	});
@@ -156,12 +156,12 @@
 									class="flex items-center gap-1 truncate text-xs font-medium text-zinc-800 dark:text-zinc-200"
 								>
 									<span class="truncate">{session.title}</span>
-									{#if session.variations?.length > 0}
+									{#if (session.variations?.length ?? 0) > 0}
 										<svg
 											class="h-3 w-3 flex-shrink-0 text-zinc-400"
 											viewBox="0 0 16 16"
 											fill="currentColor"
-											aria-label="{session.variations.length} variations"
+											aria-label="{session.variations?.length ?? 0} variations"
 										>
 											<rect x="1" y="1" width="14" height="3" rx="1" />
 											<rect x="1" y="6" width="14" height="3" rx="1" opacity="0.6" />
@@ -217,7 +217,7 @@
 		</div>
 
 		<!-- Variation tabs -->
-		{#if selectedSession.variations?.length > 0}
+		{#if (selectedSession.variations?.length ?? 0) > 0}
 			<div class="border-b border-zinc-200 px-4 dark:border-zinc-700">
 				<div class="flex gap-0 overflow-x-auto">
 					<button
