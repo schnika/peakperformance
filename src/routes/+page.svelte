@@ -117,7 +117,7 @@
 
 	<!-- Calendar grid -->
 	<div class="grid grid-cols-7 gap-px bg-zinc-200 dark:bg-zinc-800">
-		{#each calendarDays as cell (cell.date ?? cell.day)}
+		{#each calendarDays as cell, i (cell.date ?? i)}
 			<div
 				class="min-h-[80px] bg-white p-1 dark:bg-zinc-950
 					{cell.date === today ? 'ring-2 ring-inset ring-zinc-900 dark:ring-zinc-100' : ''}"
