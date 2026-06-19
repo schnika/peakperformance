@@ -1,3 +1,4 @@
+import { error } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { trainingSessions } from '$lib/server/db/schema';
 import { and, gte, lte } from 'drizzle-orm';
@@ -16,14 +17,20 @@ export const load: PageServerLoad = async ({ url }) => {
 	const lastDay = new Date(year, month, 0).getDate();
 	const endDate = `${year}-${String(month).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
 
-	const rows = await db
-		.select()
-		.from(trainingSessions)
-		.where(and(gte(trainingSessions.date, startDate), lte(trainingSessions.date, endDate)))
-		.orderBy(trainingSessions.date);
+	let rows: TrainingSession[];
+	try {
+		rows = (await db
+			.select()
+			.from(trainingSessions)
+			.where(and(gte(trainingSessions.date, startDate), lte(trainingSessions.date, endDate)))
+			.orderBy(trainingSessions.date)) as TrainingSession[];
+	} catch (e) {
+		console.error('[load] DB query failed:', e);
+		error(503, 'Database unavailable — check DATABASE_URL in Netlify environment variables');
+	}
 
 	return {
-		sessions: rows as TrainingSession[],
+		sessions: rows,
 		year,
 		month
 	};
