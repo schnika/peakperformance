@@ -6,14 +6,14 @@ calculate training paces (VDOT), and compute race splits.
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | SvelteKit 2 (Svelte 5 runes mode) |
-| Adapter | `@sveltejs/adapter-netlify` |
-| Database | Neon (Serverless PostgreSQL) |
-| ORM | Drizzle ORM (`drizzle-orm/neon-http`) |
-| Styling | TailwindCSS v4 (utility classes, system dark/light) |
-| Language | TypeScript (strict) |
+| Layer     | Technology                                          |
+| --------- | --------------------------------------------------- |
+| Framework | SvelteKit 2 (Svelte 5 runes mode)                   |
+| Adapter   | `@sveltejs/adapter-netlify`                         |
+| Database  | Neon (Serverless PostgreSQL)                        |
+| ORM       | Drizzle ORM (`drizzle-orm/neon-http`)               |
+| Styling   | TailwindCSS v4 (utility classes, system dark/light) |
+| Language  | TypeScript (strict)                                 |
 
 ## Dev Commands
 
@@ -60,16 +60,16 @@ Run `npm run test:watch` to stay in the red-green-refactor loop.
 
 Table: `training_sessions`
 
-| Column | Type | Notes |
-|---|---|---|
-| `id` | serial PK | auto-increment |
-| `date` | date | ISO format `YYYY-MM-DD` |
-| `title` | text | session name |
-| `type` | text | see types below |
-| `priority` | integer | 1=key, 2=important, 3=optional |
-| `description` | jsonb | structured session content (see schema below) |
-| `notes` | text | free-form coach remarks (nullable) |
-| `created_at` | timestamptz | auto-set |
+| Column        | Type        | Notes                                         |
+| ------------- | ----------- | --------------------------------------------- |
+| `id`          | serial PK   | auto-increment                                |
+| `date`        | date        | ISO format `YYYY-MM-DD`                       |
+| `title`       | text        | session name                                  |
+| `type`        | text        | see types below                               |
+| `priority`    | integer     | 1=key, 2=important, 3=optional                |
+| `description` | jsonb       | structured session content (see schema below) |
+| `notes`       | text        | free-form coach remarks (nullable)            |
+| `created_at`  | timestamptz | auto-set                                      |
 
 ### Session Types
 
@@ -77,41 +77,42 @@ Table: `training_sessions`
 
 ### Zone Vocabulary
 
-| Zone | Name | RPE |
-|---|---|---|
-| `zone1` | Recovery | 1–4 |
-| `zone2` | Aerobic | 5–6 |
-| `zone3` | Steady State | 7 |
-| `zone4` | Threshold | 8–9 |
-| `zone5` | VO2max | 10 |
+| Zone    | Name         | RPE |
+| ------- | ------------ | --- |
+| `zone1` | Recovery     | 1–4 |
+| `zone2` | Aerobic      | 5–6 |
+| `zone3` | Steady State | 7   |
+| `zone4` | Threshold    | 8–9 |
+| `zone5` | VO2max       | 10  |
 
 ### `description` JSONB Schema
 
 ```json
 {
-  "warmup": {
-    "duration": "15min",
-    "notes": "easy jog, mobility, drills"
-  },
-  "sets": [
-    {
-      "label": "Core Set 1",
-      "blocks": [
-        { "type": "duration", "duration": "10min", "zone": "zone4" },
-        { "type": "rest", "duration": "3min" },
-        { "type": "reps", "reps": 5, "distance": 200, "unit": "m", "zone": "zone5", "rest": "30s" },
-        { "type": "duration", "duration": "10min", "zone": "zone4" }
-      ]
-    }
-  ],
-  "cooldown": {
-    "duration": "10min",
-    "notes": "easy jog, stretching"
-  }
+	"warmup": {
+		"duration": "15min",
+		"notes": "easy jog, mobility, drills"
+	},
+	"sets": [
+		{
+			"label": "Core Set 1",
+			"blocks": [
+				{ "type": "duration", "duration": "10min", "zone": "zone4" },
+				{ "type": "rest", "duration": "3min" },
+				{ "type": "reps", "reps": 5, "distance": 200, "unit": "m", "zone": "zone5", "rest": "30s" },
+				{ "type": "duration", "duration": "10min", "zone": "zone4" }
+			]
+		}
+	],
+	"cooldown": {
+		"duration": "10min",
+		"notes": "easy jog, stretching"
+	}
 }
 ```
 
 Block types:
+
 - `duration`: `{ "type": "duration", "duration": "<time>", "zone": "<zone>" }`
 - `reps`: `{ "type": "reps", "reps": <n>, "distance": <n>, "unit": "m"|"km", "zone": "<zone>", "pace": "<optional>", "rest": "<time>" }`
 - `rest`: `{ "type": "rest", "duration": "<time>" }`

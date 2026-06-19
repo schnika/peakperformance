@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import {
-		calculateVDOT,
 		clampVDOT,
 		getZonePaces,
 		getRepetitionPaces,
 		bestVDOT,
 		formatPace,
-		formatTime,
 		parseTime,
 		REFERENCE_DISTANCES,
 		WORKOUT_DISTANCES
@@ -55,11 +53,13 @@
 
 <div class="px-4 py-5">
 	<h1 class="mb-1 text-xl font-bold text-zinc-900 dark:text-white">Pace Calculator</h1>
-	<p class="mb-6 text-sm text-zinc-500">Enter your current race times to calculate training paces (Jack Daniels VDOT).</p>
+	<p class="mb-6 text-sm text-zinc-500">
+		Enter your current race times to calculate training paces (Jack Daniels VDOT).
+	</p>
 
 	<!-- Reference time inputs -->
 	<div class="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
-		{#each REFERENCE_DISTANCES as dist}
+		{#each REFERENCE_DISTANCES as dist (dist.label)}
 			<div>
 				<label
 					for="ref-{dist.label}"
@@ -91,21 +91,31 @@
 			<table class="min-w-full text-sm">
 				<thead class="bg-zinc-50 dark:bg-zinc-800">
 					<tr>
-						<th class="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500">Zone</th>
-						{#each WORKOUT_DISTANCES as d}
-							<th class="px-3 py-2.5 text-center text-xs font-semibold uppercase tracking-wide text-zinc-500">{d.label}</th>
+						<th
+							class="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500"
+							>Zone</th
+						>
+						{#each WORKOUT_DISTANCES as d (d.label)}
+							<th
+								class="px-3 py-2.5 text-center text-xs font-semibold uppercase tracking-wide text-zinc-500"
+								>{d.label}</th
+							>
 						{/each}
 					</tr>
 				</thead>
 				<tbody class="divide-y divide-zinc-100 dark:divide-zinc-800">
-					{#each paceTable as row}
+					{#each paceTable as row (row.zone)}
 						<tr class="hover:bg-zinc-50 dark:hover:bg-zinc-900">
 							<td class="whitespace-nowrap px-3 py-2.5">
-								<span class="font-medium text-zinc-800 dark:text-zinc-200">{row.zoneLabel.name}</span>
+								<span class="font-medium text-zinc-800 dark:text-zinc-200"
+									>{row.zoneLabel.name}</span
+								>
 								<span class="ml-1.5 text-xs text-zinc-400">RPE {row.zoneLabel.rpe}</span>
 							</td>
-							{#each row.distances as cell}
-								<td class="px-3 py-2.5 text-center font-mono text-xs text-zinc-700 dark:text-zinc-300">
+							{#each row.distances as cell (cell.label)}
+								<td
+									class="px-3 py-2.5 text-center font-mono text-xs text-zinc-700 dark:text-zinc-300"
+								>
 									{cell.time}
 								</td>
 							{/each}
@@ -117,8 +127,10 @@
 								<span class="font-medium text-zinc-800 dark:text-zinc-200">Speed</span>
 								<span class="ml-1.5 text-xs text-zinc-400">Rep</span>
 							</td>
-							{#each WORKOUT_DISTANCES as d}
-								<td class="px-3 py-2.5 text-center font-mono text-xs text-zinc-700 dark:text-zinc-300">
+							{#each WORKOUT_DISTANCES as d (d.label)}
+								<td
+									class="px-3 py-2.5 text-center font-mono text-xs text-zinc-700 dark:text-zinc-300"
+								>
 									{d.label === '200m'
 										? (repPaces.rep200m ?? '—')
 										: d.label === '400m'
@@ -132,10 +144,16 @@
 			</table>
 		</div>
 
-		<p class="mt-3 text-xs text-zinc-400">Times shown per distance. For distances ≥ 1k: min:sec/km.</p>
+		<p class="mt-3 text-xs text-zinc-400">
+			Times shown per distance. For distances ≥ 1k: min:sec/km.
+		</p>
 	{:else}
-		<div class="rounded-xl border border-dashed border-zinc-300 py-12 text-center dark:border-zinc-700">
-			<p class="text-sm text-zinc-400">Enter at least one reference time to see your training paces.</p>
+		<div
+			class="rounded-xl border border-dashed border-zinc-300 py-12 text-center dark:border-zinc-700"
+		>
+			<p class="text-sm text-zinc-400">
+				Enter at least one reference time to see your training paces.
+			</p>
 		</div>
 	{/if}
 </div>

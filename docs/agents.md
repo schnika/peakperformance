@@ -12,15 +12,15 @@ Guidelines for Claude Code agents working in this repository.
 
 ## File Ownership
 
-| Area | Files | Notes |
-|---|---|---|
-| Schema | `src/lib/server/db/schema.ts` | Always run `npm run db:push` after changes |
-| Types | `src/lib/types.ts` | Shared — changes affect all pages |
-| VDOT logic | `src/lib/vdot.ts` | Pure functions, no side effects |
-| Calendar | `src/routes/+page.svelte`, `+page.server.ts` | Read-only UI |
-| Pace calc | `src/routes/pace/+page.svelte` | Client-only, uses localStorage |
-| Splits calc | `src/routes/splits/+page.svelte` | Client-only |
-| LLM docs | `CLAUDE.md`, `docs/` | Keep in sync when schema changes |
+| Area        | Files                                        | Notes                                      |
+| ----------- | -------------------------------------------- | ------------------------------------------ |
+| Schema      | `src/lib/server/db/schema.ts`                | Always run `npm run db:push` after changes |
+| Types       | `src/lib/types.ts`                           | Shared — changes affect all pages          |
+| VDOT logic  | `src/lib/vdot.ts`                            | Pure functions, no side effects            |
+| Calendar    | `src/routes/+page.svelte`, `+page.server.ts` | Read-only UI                               |
+| Pace calc   | `src/routes/pace/+page.svelte`               | Client-only, uses localStorage             |
+| Splits calc | `src/routes/splits/+page.svelte`             | Client-only                                |
+| LLM docs    | `CLAUDE.md`, `docs/`                         | Keep in sync when schema changes           |
 
 ## Schema Changes
 
@@ -43,16 +43,17 @@ Validate the description structure against the schema in `CLAUDE.md` before inse
 
 Format: `<type>(<scope>): <description>`
 
-| Type | When |
-|---|---|
-| `feat` | New feature or page |
-| `fix` | Bug fix |
-| `chore` | Tooling, dependencies, config |
-| `docs` | Documentation only |
-| `style` | Formatting, no logic change |
+| Type       | When                                  |
+| ---------- | ------------------------------------- |
+| `feat`     | New feature or page                   |
+| `fix`      | Bug fix                               |
+| `chore`    | Tooling, dependencies, config         |
+| `docs`     | Documentation only                    |
+| `style`    | Formatting, no logic change           |
 | `refactor` | Restructuring without behavior change |
 
 Examples:
+
 ```
 feat(calendar): add session type color legend
 fix(vdot): correct zone3 pace boundary calculation
@@ -78,6 +79,7 @@ When adding features: put **logic** in the domain layer, put **framework wiring*
 All domain logic is covered by unit tests (`src/lib/domain/**/*.test.ts`).
 
 The TDD workflow for any domain change:
+
 1. Write a failing test that specifies the expected behavior
 2. Implement the logic until the test passes
 3. Refactor if needed — tests protect the behavior

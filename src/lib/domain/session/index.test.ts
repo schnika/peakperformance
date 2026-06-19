@@ -72,7 +72,10 @@ describe('describeBlock', () => {
 	});
 
 	it('describes a duration block', () => {
-		const result = describeBlock({ type: 'duration', duration: '10min', zone: 'zone4' }, ZONE_LABELS);
+		const result = describeBlock(
+			{ type: 'duration', duration: '10min', zone: 'zone4' },
+			ZONE_LABELS
+		);
 		expect(result).toContain('10min');
 		expect(result).toContain('Threshold');
 	});

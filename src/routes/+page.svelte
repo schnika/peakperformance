@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
 	import { buildCalendarGrid, nextMonth, prevMonth } from '$lib/domain/calendar';
 	import {
 		SESSION_TYPE_COLORS,
@@ -15,8 +14,18 @@
 	let { data } = $props();
 
 	const MONTH_NAMES = [
-		'January', 'February', 'March', 'April', 'May', 'June',
-		'July', 'August', 'September', 'October', 'November', 'December'
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December'
 	];
 	const DAY_NAMES = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
@@ -25,9 +34,8 @@
 	const selectedDesc = $derived(selectedSession?.description as SessionDescription | null);
 
 	function navigate(delta: number) {
-		const { year, month } = delta < 0
-			? prevMonth(data.year, data.month)
-			: nextMonth(data.year, data.month);
+		const { year, month } =
+			delta < 0 ? prevMonth(data.year, data.month) : nextMonth(data.year, data.month);
 		goto(`/?year=${year}&month=${month}`);
 	}
 
@@ -56,7 +64,12 @@
 
 	function formatDate(dateStr: string): string {
 		const d = new Date(dateStr + 'T00:00:00');
-		return d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+		return d.toLocaleDateString('en-GB', {
+			weekday: 'long',
+			day: 'numeric',
+			month: 'long',
+			year: 'numeric'
+		});
 	}
 
 	function descBlock(block: Block): string {
@@ -80,7 +93,8 @@
 		</button>
 
 		<h1 class="text-lg font-semibold text-zinc-900 dark:text-white">
-			{MONTH_NAMES[data.month - 1]} {data.year}
+			{MONTH_NAMES[data.month - 1]}
+			{data.year}
 		</h1>
 
 		<button
@@ -96,14 +110,14 @@
 
 	<!-- Day names -->
 	<div class="mb-1 grid grid-cols-7 gap-px">
-		{#each DAY_NAMES as d}
+		{#each DAY_NAMES as d (d)}
 			<div class="py-1 text-center text-xs font-medium text-zinc-400">{d}</div>
 		{/each}
 	</div>
 
 	<!-- Calendar grid -->
 	<div class="grid grid-cols-7 gap-px bg-zinc-200 dark:bg-zinc-800">
-		{#each calendarDays as cell}
+		{#each calendarDays as cell (cell.date ?? cell.day)}
 			<div
 				class="min-h-[80px] bg-white p-1 dark:bg-zinc-950
 					{cell.date === today ? 'ring-2 ring-inset ring-zinc-900 dark:ring-zinc-100' : ''}"
@@ -112,14 +126,18 @@
 					<span class="mb-1 block text-xs font-medium text-zinc-400 dark:text-zinc-500">
 						{cell.day}
 					</span>
-					{#each cell.sessions as session}
+					{#each cell.sessions as session (session.id)}
 						<button
 							onclick={() => openDrawer(session)}
 							class="mb-1 flex w-full items-start gap-1 rounded px-1 py-0.5 text-left hover:bg-zinc-50 dark:hover:bg-zinc-900"
 						>
-							<span class="mt-1 h-2 w-2 flex-shrink-0 rounded-full {SESSION_TYPE_COLORS[session.type]}"></span>
+							<span
+								class="mt-1 h-2 w-2 flex-shrink-0 rounded-full {SESSION_TYPE_COLORS[session.type]}"
+							></span>
 							<div class="min-w-0 flex-1">
-								<p class="truncate text-xs font-medium text-zinc-800 dark:text-zinc-200">{session.title}</p>
+								<p class="truncate text-xs font-medium text-zinc-800 dark:text-zinc-200">
+									{session.title}
+								</p>
 								<p class="text-[10px] text-zinc-400">
 									{priorityDots(session.priority)}
 								</p>
@@ -149,7 +167,9 @@
 		{drawerOpen ? 'translate-x-0' : 'translate-x-full'}"
 >
 	{#if selectedSession}
-		<div class="flex items-center justify-between border-b border-zinc-200 px-4 py-4 dark:border-zinc-700">
+		<div
+			class="flex items-center justify-between border-b border-zinc-200 px-4 py-4 dark:border-zinc-700"
+		>
 			<div>
 				<h2 class="font-semibold text-zinc-900 dark:text-white">{selectedSession.title}</h2>
 				<p class="text-sm text-zinc-500">{formatDate(selectedSession.date)}</p>
@@ -168,13 +188,21 @@
 		<div class="flex-1 space-y-5 px-4 py-4">
 			<!-- Type + priority -->
 			<div class="flex items-center gap-3">
-				<span class="rounded-full px-2.5 py-1 text-sm font-medium capitalize {SESSION_TYPE_BG_COLORS[selectedSession.type]}">
+				<span
+					class="rounded-full px-2.5 py-1 text-sm font-medium capitalize {SESSION_TYPE_BG_COLORS[
+						selectedSession.type
+					]}"
+				>
 					{selectedSession.type}
 				</span>
 				<span class="font-mono text-sm text-zinc-500">
 					{priorityDots(selectedSession.priority)}
 					<span class="ml-1 text-xs">
-						{selectedSession.priority === 1 ? 'Key session' : selectedSession.priority === 2 ? 'Important' : 'Optional'}
+						{selectedSession.priority === 1
+							? 'Key session'
+							: selectedSession.priority === 2
+								? 'Important'
+								: 'Optional'}
 					</span>
 				</span>
 			</div>
@@ -183,19 +211,27 @@
 			{#if selectedDesc}
 				{#if selectedDesc.warmup}
 					<div>
-						<h3 class="mb-1.5 text-xs font-semibold uppercase tracking-wide text-zinc-400">Warm-up</h3>
+						<h3 class="mb-1.5 text-xs font-semibold uppercase tracking-wide text-zinc-400">
+							Warm-up
+						</h3>
 						<p class="text-sm text-zinc-700 dark:text-zinc-300">
-							{selectedDesc.warmup.duration}{selectedDesc.warmup.notes ? ` — ${selectedDesc.warmup.notes}` : ''}
+							{selectedDesc.warmup.duration}{selectedDesc.warmup.notes
+								? ` — ${selectedDesc.warmup.notes}`
+								: ''}
 						</p>
 					</div>
 				{/if}
 
-				{#each selectedDesc.sets as set}
+				{#each selectedDesc.sets as set (set.label)}
 					<div>
-						<h3 class="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-400">{set.label}</h3>
+						<h3 class="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-400">
+							{set.label}
+						</h3>
 						<ul class="space-y-1.5">
-							{#each set.blocks as block}
-								<li class="rounded-lg bg-zinc-50 px-3 py-2 text-sm text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+							{#each set.blocks as block, i (i)}
+								<li
+									class="rounded-lg bg-zinc-50 px-3 py-2 text-sm text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+								>
 									{descBlock(block)}
 								</li>
 							{/each}
@@ -205,9 +241,13 @@
 
 				{#if selectedDesc.cooldown}
 					<div>
-						<h3 class="mb-1.5 text-xs font-semibold uppercase tracking-wide text-zinc-400">Cool-down</h3>
+						<h3 class="mb-1.5 text-xs font-semibold uppercase tracking-wide text-zinc-400">
+							Cool-down
+						</h3>
 						<p class="text-sm text-zinc-700 dark:text-zinc-300">
-							{selectedDesc.cooldown.duration}{selectedDesc.cooldown.notes ? ` — ${selectedDesc.cooldown.notes}` : ''}
+							{selectedDesc.cooldown.duration}{selectedDesc.cooldown.notes
+								? ` — ${selectedDesc.cooldown.notes}`
+								: ''}
 						</p>
 					</div>
 				{/if}

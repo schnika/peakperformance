@@ -58,7 +58,12 @@ export interface TrainingSession {
 }
 
 export const VALID_SESSION_TYPES: SessionType[] = [
-	'interval', 'tempo', 'easy', 'long', 'race', 'rest'
+	'interval',
+	'tempo',
+	'easy',
+	'long',
+	'race',
+	'rest'
 ];
 
 export const VALID_ZONES: Zone[] = ['zone1', 'zone2', 'zone3', 'zone4', 'zone5'];
@@ -77,7 +82,10 @@ export function priorityDots(priority: number): string {
 }
 
 /** Returns a human-readable description of a single block. */
-export function describeBlock(block: Block, zoneLabels: Record<Zone, { name: string; rpe: string }>): string {
+export function describeBlock(
+	block: Block,
+	zoneLabels: Record<Zone, { name: string; rpe: string }>
+): string {
 	if (block.type === 'rest') return `Rest ${block.duration}`;
 	if (block.type === 'duration') {
 		const z = zoneLabels[block.zone];
@@ -96,7 +104,8 @@ export function isValidDescription(desc: unknown): desc is SessionDescription {
 	if (!Array.isArray(d.sets)) return false;
 	return d.sets.every(
 		(s: unknown) =>
-			s && typeof s === 'object' &&
+			s &&
+			typeof s === 'object' &&
 			typeof (s as Record<string, unknown>).label === 'string' &&
 			Array.isArray((s as Record<string, unknown>).blocks)
 	);

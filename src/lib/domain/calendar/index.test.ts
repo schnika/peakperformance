@@ -3,7 +3,12 @@ import { buildCalendarGrid, prevMonth, nextMonth } from './index';
 
 describe('buildCalendarGrid', () => {
 	it('always produces a multiple of 7 cells', () => {
-		for (const [y, m] of [[2026, 1], [2026, 6], [2026, 2], [2024, 2]]) {
+		for (const [y, m] of [
+			[2026, 1],
+			[2026, 6],
+			[2026, 2],
+			[2024, 2]
+		]) {
 			const { cells } = buildCalendarGrid(y, m);
 			expect(cells.length % 7).toBe(0);
 		}

@@ -56,20 +56,23 @@
 		for (let km = 1; km <= totalKmInt; km++) {
 			const frac = (km * 1000) / d.meters;
 			const prevFrac = ((km - 1) * 1000) / d.meters;
-			const secThisKm = frac <= 0.5 || prevFrac >= 0.5
-				? (frac <= 0.5 ? secPerKmFirst : secPerKmSecond)
-				: (() => {
-					const firstPart = (0.5 - prevFrac) * d.meters;
-					const secondPart = 1000 - firstPart;
-					return (firstPart / 1000) * secPerKmFirst + (secondPart / 1000) * secPerKmSecond;
-				})();
+			const secThisKm =
+				frac <= 0.5 || prevFrac >= 0.5
+					? frac <= 0.5
+						? secPerKmFirst
+						: secPerKmSecond
+					: (() => {
+							const firstPart = (0.5 - prevFrac) * d.meters;
+							const secondPart = 1000 - firstPart;
+							return (firstPart / 1000) * secPerKmFirst + (secondPart / 1000) * secPerKmSecond;
+						})();
 			cum += secThisKm;
 			result.push({ label: `${km} km`, seconds: secThisKm, cumulative: cum });
 		}
 
 		const remainder = totalKm - totalKmInt;
 		if (remainder > 0.01) {
-			const remSec = (remainder * 1000 / 1000) * secPerKmSecond;
+			const remSec = ((remainder * 1000) / 1000) * secPerKmSecond;
 			cum += remSec;
 			result.push({ label: `${totalKm.toFixed(1)} km`, seconds: remSec, cumulative: cum });
 		}
@@ -108,13 +111,13 @@
 		<div>
 			<p class="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">Distance</p>
 			<div class="flex flex-wrap gap-2">
-				{#each REFERENCE_DISTANCES as d}
+				{#each REFERENCE_DISTANCES as d (d.label)}
 					<button
 						onclick={() => (distanceLabel = d.label)}
 						class="rounded-lg px-3 py-1.5 text-sm font-medium transition-colors
 							{distanceLabel === d.label
-								? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
-								: 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700'}"
+							? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
+							: 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700'}"
 					>
 						{d.label}
 					</button>
@@ -124,7 +127,11 @@
 
 		<!-- Target time -->
 		<div>
-			<label for="target-time" class="mb-1 block text-xs font-semibold uppercase tracking-wide text-zinc-500">Target Time</label>
+			<label
+				for="target-time"
+				class="mb-1 block text-xs font-semibold uppercase tracking-wide text-zinc-500"
+				>Target Time</label
+			>
 			<input
 				id="target-time"
 				type="text"
@@ -139,13 +146,13 @@
 		<div>
 			<p class="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">Strategy</p>
 			<div class="flex gap-2">
-				{#each [['even', 'Even'], ['negative', 'Negative split']] as [val, label]}
+				{#each [['even', 'Even'], ['negative', 'Negative split']] as [val, label] (val)}
 					<button
 						onclick={() => (strategy = val as SplitStrategy)}
 						class="rounded-lg px-3 py-1.5 text-sm font-medium transition-colors
 							{strategy === val
-								? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
-								: 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300'}"
+							? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
+							: 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300'}"
 					>
 						{label}
 					</button>
@@ -155,8 +162,12 @@
 			{#if strategy === 'negative'}
 				<div class="mt-3">
 					<label for="first-half-pct" class="mb-1 block text-xs text-zinc-500">
-						First half: <span class="font-semibold text-zinc-700 dark:text-zinc-300">{firstHalfPct}%</span>
-						/ Second half: <span class="font-semibold text-zinc-700 dark:text-zinc-300">{100 - firstHalfPct}%</span>
+						First half: <span class="font-semibold text-zinc-700 dark:text-zinc-300"
+							>{firstHalfPct}%</span
+						>
+						/ Second half:
+						<span class="font-semibold text-zinc-700 dark:text-zinc-300">{100 - firstHalfPct}%</span
+						>
 					</label>
 					<input
 						id="first-half-pct"
@@ -178,17 +189,30 @@
 			<table class="min-w-full text-sm">
 				<thead class="bg-zinc-50 dark:bg-zinc-800">
 					<tr>
-						<th class="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500">Km</th>
-						<th class="px-4 py-2.5 text-right text-xs font-semibold uppercase tracking-wide text-zinc-500">Split</th>
-						<th class="px-4 py-2.5 text-right text-xs font-semibold uppercase tracking-wide text-zinc-500">Cumulative</th>
+						<th
+							class="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500"
+							>Km</th
+						>
+						<th
+							class="px-4 py-2.5 text-right text-xs font-semibold uppercase tracking-wide text-zinc-500"
+							>Split</th
+						>
+						<th
+							class="px-4 py-2.5 text-right text-xs font-semibold uppercase tracking-wide text-zinc-500"
+							>Cumulative</th
+						>
 					</tr>
 				</thead>
 				<tbody class="divide-y divide-zinc-100 dark:divide-zinc-800">
-					{#each splits as s}
+					{#each splits as s (s.label)}
 						<tr class="hover:bg-zinc-50 dark:hover:bg-zinc-900">
 							<td class="px-4 py-2.5 text-zinc-700 dark:text-zinc-300">{s.label}</td>
-							<td class="px-4 py-2.5 text-right font-mono text-zinc-800 dark:text-zinc-200">{formatTime(s.seconds)}</td>
-							<td class="px-4 py-2.5 text-right font-mono text-zinc-500">{formatTime(s.cumulative)}</td>
+							<td class="px-4 py-2.5 text-right font-mono text-zinc-800 dark:text-zinc-200"
+								>{formatTime(s.seconds)}</td
+							>
+							<td class="px-4 py-2.5 text-right font-mono text-zinc-500"
+								>{formatTime(s.cumulative)}</td
+							>
 						</tr>
 					{/each}
 				</tbody>
@@ -202,17 +226,30 @@
 				<table class="min-w-full text-sm">
 					<thead class="bg-zinc-50 dark:bg-zinc-800">
 						<tr>
-							<th class="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500">Lap</th>
-							<th class="px-4 py-2.5 text-right text-xs font-semibold uppercase tracking-wide text-zinc-500">Time</th>
-							<th class="px-4 py-2.5 text-right text-xs font-semibold uppercase tracking-wide text-zinc-500">Cumulative</th>
+							<th
+								class="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500"
+								>Lap</th
+							>
+							<th
+								class="px-4 py-2.5 text-right text-xs font-semibold uppercase tracking-wide text-zinc-500"
+								>Time</th
+							>
+							<th
+								class="px-4 py-2.5 text-right text-xs font-semibold uppercase tracking-wide text-zinc-500"
+								>Cumulative</th
+							>
 						</tr>
 					</thead>
 					<tbody class="divide-y divide-zinc-100 dark:divide-zinc-800">
-						{#each lapSplits as s}
+						{#each lapSplits as s (s.label)}
 							<tr class="hover:bg-zinc-50 dark:hover:bg-zinc-900">
 								<td class="px-4 py-2.5 text-zinc-700 dark:text-zinc-300">{s.label}</td>
-								<td class="px-4 py-2.5 text-right font-mono text-zinc-800 dark:text-zinc-200">{formatTime(s.seconds)}</td>
-								<td class="px-4 py-2.5 text-right font-mono text-zinc-500">{formatTime(s.cumulative)}</td>
+								<td class="px-4 py-2.5 text-right font-mono text-zinc-800 dark:text-zinc-200"
+									>{formatTime(s.seconds)}</td
+								>
+								<td class="px-4 py-2.5 text-right font-mono text-zinc-500"
+									>{formatTime(s.cumulative)}</td
+								>
 							</tr>
 						{/each}
 					</tbody>
@@ -220,7 +257,9 @@
 			</div>
 		{/if}
 	{:else}
-		<div class="rounded-xl border border-dashed border-zinc-300 py-12 text-center dark:border-zinc-700">
+		<div
+			class="rounded-xl border border-dashed border-zinc-300 py-12 text-center dark:border-zinc-700"
+		>
 			<p class="text-sm text-zinc-400">Enter a target time to see splits.</p>
 		</div>
 	{/if}
