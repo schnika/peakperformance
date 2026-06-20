@@ -1,14 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { priorityDots, priorityLabel, isValidDescription, describeBlock } from './index';
-import type { Zone } from './index';
-
-const ZONE_LABELS: Record<Zone, { name: string; rpe: string }> = {
-	zone1: { name: 'Recovery', rpe: '1–4' },
-	zone2: { name: 'Aerobic', rpe: '5–6' },
-	zone3: { name: 'Steady State', rpe: '7' },
-	zone4: { name: 'Threshold', rpe: '8–9' },
-	zone5: { name: 'VO2max', rpe: '10' }
-};
+import { ZONE_LABELS } from './zones';
 
 describe('priorityDots', () => {
 	it('returns 3 filled dots for priority 1', () => {
@@ -77,7 +69,7 @@ describe('describeBlock', () => {
 			ZONE_LABELS
 		);
 		expect(result).toContain('10min');
-		expect(result).toContain('Threshold');
+		expect(result).toContain('VO2max-Intervall');
 	});
 
 	it('describes a reps block', () => {
@@ -86,7 +78,7 @@ describe('describeBlock', () => {
 			ZONE_LABELS
 		);
 		expect(result).toContain('6 × 800m');
-		expect(result).toContain('VO2max');
+		expect(result).toContain('Repetition / Sprint');
 		expect(result).toContain('rest 90s');
 	});
 
