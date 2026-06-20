@@ -138,7 +138,7 @@
 		{#each calendarDays as cell, i (cell.date ?? i)}
 			<div
 				class="min-h-[80px] bg-white p-1 dark:bg-zinc-950"
-					style={cell.date === today ? 'box-shadow: inset 0 0 0 2px var(--komet-gold);' : ''}
+				style={cell.date === today ? 'box-shadow: inset 0 0 0 2px var(--komet-gold);' : ''}
 			>
 				{#if cell.day !== null}
 					<span class="mb-1 block text-xs font-medium text-zinc-400 dark:text-zinc-500">
@@ -203,7 +203,12 @@
 			class="flex items-center justify-between border-b border-zinc-200 px-4 py-4 dark:border-zinc-700"
 		>
 			<div>
-				<h2 class="font-semibold text-zinc-900 dark:text-white" title={titleTooltip(selectedSession.title)}>{selectedSession.title}</h2>
+				<h2
+					class="font-semibold text-zinc-900 dark:text-white"
+					title={titleTooltip(selectedSession.title)}
+				>
+					{selectedSession.title}
+				</h2>
 				<p class="text-sm text-zinc-500">{formatDate(selectedSession.date)}</p>
 			</div>
 			<button
@@ -227,7 +232,9 @@
 							{selectedVariationIndex === null
 							? 'border-transparent'
 							: 'border-transparent text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}"
-						style={selectedVariationIndex === null ? 'border-bottom-color: var(--komet-brown); color: var(--komet-brown);' : ''}
+						style={selectedVariationIndex === null
+							? 'border-bottom-color: var(--komet-brown); color: var(--komet-brown);'
+							: ''}
 					>
 						Base
 					</button>
@@ -238,7 +245,9 @@
 								{selectedVariationIndex === i
 								? 'border-transparent'
 								: 'border-transparent text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}"
-							style={selectedVariationIndex === i ? 'border-bottom-color: var(--komet-brown); color: var(--komet-brown);' : ''}
+							style={selectedVariationIndex === i
+								? 'border-bottom-color: var(--komet-brown); color: var(--komet-brown);'
+								: ''}
 						>
 							{variation.label}
 						</button>

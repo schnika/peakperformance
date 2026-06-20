@@ -4,26 +4,26 @@ Verbindliche Begriffe und Regeln für Titel, Notes und Block-Beschreibungen.
 
 ## Laufspezifische Abkürzungen
 
-| Kürzel | Langform |
-|--------|----------|
-| LDL | Langer Dauerlauf |
-| SWL | Schwellenlauf |
-| TDL | Tempodauerlauf |
-| TWL | Tempowechsellauf |
-| BAL | Berganläufe |
-| FL | Fartlek |
-| StL | Stufenlauf |
-| LL | Lockerer Lauf |
+| Kürzel | Langform         |
+| ------ | ---------------- |
+| LDL    | Langer Dauerlauf |
+| SWL    | Schwellenlauf    |
+| TDL    | Tempodauerlauf   |
+| TWL    | Tempowechsellauf |
+| BAL    | Berganläufe      |
+| FL     | Fartlek          |
+| StL    | Stufenlauf       |
+| LL     | Lockerer Lauf    |
 
 ## Session-Titel
 
-| Konzept | Titel |
-|---------|-------|
-| Lockeres Laufen | Lockerer Lauf |
-| Hügelsprints | Hillreps |
-| 10-20-30 Einheit | 10-20-30 |
-| Langer Lauf mit Steigerung am Ende | Langer Lauf (progressiv) |
-| Wettkampf | *Rennname* (Eigenname, unveränderlich) |
+| Konzept                            | Titel                                  |
+| ---------------------------------- | -------------------------------------- |
+| Lockeres Laufen                    | Lockerer Lauf                          |
+| Hügelsprints                       | Hillreps                               |
+| 10-20-30 Einheit                   | 10-20-30                               |
+| Langer Lauf mit Steigerung am Ende | Langer Lauf (progressiv)               |
+| Wettkampf                          | _Rennname_ (Eigenname, unveränderlich) |
 
 ## Intensitäten & Zonen
 
@@ -38,20 +38,20 @@ Verbindliche Begriffe und Regeln für Titel, Notes und Block-Beschreibungen.
 
 ## Pausen
 
-| Art | Schreibweise |
-|-----|--------------|
+| Art              | Schreibweise    |
+| ---------------- | --------------- |
 | Aktive Trabpause | `zurück traben` |
-| Gehpause | `walk back` |
-| Feste Pause | `3:00` (mm:ss) |
+| Gehpause         | `walk back`     |
+| Feste Pause      | `3:00` (mm:ss)  |
 
 ## Wiederkehrende Phrasen (Notes)
 
-| Kontext | Formulierung |
-|---------|--------------|
-| Optionaler Easy-Tag | `Optional. Wirklich easy.` |
-| Optionaler kurzer Easy-Tag | `Optional. Kurz und locker.` |
-| Intensitätshinweis Schwelle | `RPE 6–7.` |
-| Aktive Pause bei Intervallen | `3 min aktiv traben.` |
+| Kontext                      | Formulierung                 |
+| ---------------------------- | ---------------------------- |
+| Optionaler Easy-Tag          | `Optional. Wirklich easy.`   |
+| Optionaler kurzer Easy-Tag   | `Optional. Kurz und locker.` |
+| Intensitätshinweis Schwelle  | `RPE 6–7.`                   |
+| Aktive Pause bei Intervallen | `3 min aktiv traben.`        |
 
 ## Verpflegung
 

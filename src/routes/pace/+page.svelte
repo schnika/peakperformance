@@ -31,10 +31,22 @@
 		<table class="min-w-full text-sm">
 			<thead>
 				<tr class="bg-zinc-50 dark:bg-zinc-800">
-					<th class="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500">Zone</th>
-					<th class="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500">Name</th>
-					<th class="px-3 py-2.5 text-center text-xs font-semibold uppercase tracking-wide text-zinc-500">RPE</th>
-					<th class="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500">Daniels</th>
+					<th
+						class="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500"
+						>Zone</th
+					>
+					<th
+						class="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500"
+						>Name</th
+					>
+					<th
+						class="px-3 py-2.5 text-center text-xs font-semibold uppercase tracking-wide text-zinc-500"
+						>RPE</th
+					>
+					<th
+						class="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500"
+						>Daniels</th
+					>
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-zinc-100 dark:divide-zinc-800">
@@ -42,14 +54,19 @@
 					<tr class="hover:bg-zinc-50 dark:hover:bg-zinc-900">
 						<td class="px-3 py-2.5">
 							<span class="inline-flex items-center gap-1.5">
-								<span class="h-2.5 w-2.5 flex-shrink-0 rounded-full" style="background:{zoneColors[key]}"></span>
+								<span
+									class="h-2.5 w-2.5 flex-shrink-0 rounded-full"
+									style="background:{zoneColors[key]}"
+								></span>
 								<span class="font-mono text-xs font-medium text-zinc-500">Z{i + 1}</span>
 							</span>
 						</td>
 						<td class="px-3 py-2.5 font-medium text-zinc-800 dark:text-zinc-200">{z.name}</td>
 						<td class="px-3 py-2.5 text-center">
-							<span class="rounded-full px-2 py-0.5 text-xs font-semibold"
-								style="background:{zoneColors[key]}22; color:{zoneColors[key]}">
+							<span
+								class="rounded-full px-2 py-0.5 text-xs font-semibold"
+								style="background:{zoneColors[key]}22; color:{zoneColors[key]}"
+							>
 								{z.rpe}
 							</span>
 						</td>

@@ -31,36 +31,41 @@ as RPE. Anchors:
 
 Zone names and RPE ranges: see `src/lib/types.ts` (`ZONE_LABELS`) — single source of truth.
 
-| Zone   | Daniels ref | Physiology                     |
-| ------ | ----------- | ------------------------------ |
-| zone1  | E           | below LT1, aerobic system      |
-| zone2  | M           | near LT1, high fat oxidation   |
-| zone3  | T           | around LT2, lactate balanced   |
-| zone4  | I           | above LT2, VO2max stimulus     |
-| zone5  | R           | neuromuscular, anaerobic       |
+| Zone  | Daniels ref | Physiology                   |
+| ----- | ----------- | ---------------------------- |
+| zone1 | E           | below LT1, aerobic system    |
+| zone2 | M           | near LT1, high fat oxidation |
+| zone3 | T           | around LT2, lactate balanced |
+| zone4 | I           | above LT2, VO2max stimulus   |
+| zone5 | R           | neuromuscular, anaerobic     |
 
 ---
 
 ## Evidence-Based Methods
 
 ### VO2max Intervals (Helgerud 2007, Laursen & Jenkins 2002)
+
 4–5 × 4 min @ zone4, 3 min active recovery. Most effective method for improving VO2max.
 Variants: 6 × 3 min, 8 × 2 min.
 
 ### Threshold / Cruise Intervals
+
 20–40 min @ zone3 (LT2). Improves critical velocity. More effective than short intervals
 for race-specific endurance. Cruise Intervals: 3–4 × 8–10 min with 1 min recovery.
 
 ### 10-20-30 Training (Gunnarsson & Bangsbo 2012)
+
 Blocks of 30s easy / 20s moderate / 10s sprint. Time-efficient, large cardiovascular and
 neuromuscular effect at low volume. Well-suited for heterogeneous groups — sprint pace is
 self-regulated. Ideal for the 5k/10k group.
 
 ### Speed Endurance (Bangsbo 2009)
+
 Short intensive reps (200–400m @ zone5) with long recovery (2–4 min). Improves running
 economy and neuromuscular efficiency.
 
 ### Long Run with Progressive Finish
+
 70–80% easy (zone1–2), final 15–25% @ zone2–3. More effective than constant easy pace
 (Daniels study, confirmed by Scharhag-Rosenberger 2020).
 
@@ -86,10 +91,10 @@ or plyometric exercises.
 
 ## Training Groups
 
-| Group   | Target distance   | Weekly volume  |
-| ------- | ----------------- | -------------- |
-| Group A | Half Marathon / Marathon | 40–70 km |
-| Group B | 5k / 10k          | 25–40 km       |
+| Group   | Target distance          | Weekly volume |
+| ------- | ------------------------ | ------------- |
+| Group A | Half Marathon / Marathon | 40–70 km      |
+| Group B | 5k / 10k                 | 25–40 km      |
 
 Quality sessions are shared — Group A does more reps or longer sets. Volume difference
 is managed through easy runs and long run distance.
@@ -98,15 +103,15 @@ is managed through easy runs and long run distance.
 
 ## Weekly Template
 
-| Day | Session                              | Type    | Priority |
-| --- | ------------------------------------ | ------- | -------- |
-| Mon | Quality 2 (homework, future: group)  | Quality | 1        |
-| Tue | Easy (optional)                      | Easy    | 3        |
-| Wed | Easy (optional)                      | Easy    | 3        |
-| Thu | Quality 1 (**group session — fixed**) | Quality | 1       |
-| Fri | Easy (optional)                      | Easy    | 3        |
-| Sat | Long run                             | Long    | 2        |
-| Sun | Easy (optional)                      | Easy    | 3        |
+| Day | Session                               | Type    | Priority |
+| --- | ------------------------------------- | ------- | -------- |
+| Mon | Quality 2 (homework, future: group)   | Quality | 1        |
+| Tue | Easy (optional)                       | Easy    | 3        |
+| Wed | Easy (optional)                       | Easy    | 3        |
+| Thu | Quality 1 (**group session — fixed**) | Quality | 1        |
+| Fri | Easy (optional)                       | Easy    | 3        |
+| Sat | Long run                              | Long    | 2        |
+| Sun | Easy (optional)                       | Easy    | 3        |
 
 Max 5 sessions/week. Easy days are deliberately zone1 (RPE 1–3) — no moderate filler.
 
@@ -114,12 +119,12 @@ Max 5 sessions/week. Easy days are deliberately zone1 (RPE 1–3) — no moderat
 
 ## Race Calendar & Macro Phases
 
-| Date       | Race                           | Significance          |
-| ---------- | ------------------------------ | --------------------- |
+| Date       | Race                           | Significance              |
+| ---------- | ------------------------------ | ------------------------- |
 | 2026-08-30 | Blankeneser Heldenlauf (5–21k) | Experience event, no peak |
-| 2026-10-03 | Herbstlauf                     | First performance marker |
-| 2026-11-08 | Herbstlauf                     | Main autumn target    |
-| 2027-04    | Hamburg Marathon/HM + 5k/10k   | Season peak           |
+| 2026-10-03 | Herbstlauf                     | First performance marker  |
+| 2026-11-08 | Herbstlauf                     | Main autumn target        |
+| 2027-04    | Hamburg Marathon/HM + 5k/10k   | Season peak               |
 
 **Macro phases:**
 
