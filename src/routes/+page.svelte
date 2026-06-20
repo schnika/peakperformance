@@ -5,6 +5,7 @@
 		SESSION_TYPE_COLORS,
 		SESSION_TYPE_BG_COLORS,
 		ZONE_LABELS,
+		titleTooltip,
 		type TrainingSession,
 		type SessionDescription,
 		type Block
@@ -155,7 +156,7 @@
 								<p
 									class="flex items-center gap-1 truncate text-xs font-medium text-zinc-800 dark:text-zinc-200"
 								>
-									<span class="truncate">{session.title}</span>
+									<span class="truncate" title={titleTooltip(session.title)}>{session.title}</span>
 									{#if (session.variations?.length ?? 0) > 0}
 										<svg
 											class="h-3 w-3 flex-shrink-0 text-zinc-400"
@@ -202,7 +203,7 @@
 			class="flex items-center justify-between border-b border-zinc-200 px-4 py-4 dark:border-zinc-700"
 		>
 			<div>
-				<h2 class="font-semibold text-zinc-900 dark:text-white">{selectedSession.title}</h2>
+				<h2 class="font-semibold text-zinc-900 dark:text-white" title={titleTooltip(selectedSession.title)}>{selectedSession.title}</h2>
 				<p class="text-sm text-zinc-500">{formatDate(selectedSession.date)}</p>
 			</div>
 			<button
@@ -277,7 +278,7 @@
 						</h3>
 						<p class="text-sm text-zinc-700 dark:text-zinc-300">
 							{activeDesc.warmup.duration}{activeDesc.warmup.notes
-								? ` — ${activeDesc.warmup.notes}`
+								? `; ${activeDesc.warmup.notes}`
 								: ''}
 						</p>
 					</div>
@@ -307,7 +308,7 @@
 						</h3>
 						<p class="text-sm text-zinc-700 dark:text-zinc-300">
 							{activeDesc.cooldown.duration}{activeDesc.cooldown.notes
-								? ` — ${activeDesc.cooldown.notes}`
+								? `; ${activeDesc.cooldown.notes}`
 								: ''}
 						</p>
 					</div>

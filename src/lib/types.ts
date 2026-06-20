@@ -16,6 +16,22 @@ export type {
 
 export { ZONE_LABELS } from '$lib/domain/session/zones';
 
+export const TITLE_ABBREVIATIONS: Record<string, string> = {
+	LDL: 'Langer Dauerlauf',
+	SWL: 'Schwellenlauf',
+	TDL: 'Tempodauerlauf',
+	TWL: 'Tempowechsellauf',
+	BAL: 'Berganläufe',
+	FL: 'Fartlek',
+	StL: 'Stufenlauf',
+	LL: 'Lockerer Lauf'
+};
+
+export function titleTooltip(title: string): string | undefined {
+	const abbr = title.split(' ')[0];
+	return TITLE_ABBREVIATIONS[abbr];
+}
+
 export const SESSION_TYPE_COLORS: Record<string, string> = {
 	interval: 'bg-red-500',
 	tempo: 'bg-orange-500',

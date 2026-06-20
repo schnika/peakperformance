@@ -96,12 +96,12 @@ export function describeBlock(
 	if (block.type === 'rest') return `Rest ${block.duration}`;
 	if (block.type === 'duration') {
 		const z = zoneLabels[block.zone];
-		return `${block.duration} — ${z?.name ?? block.zone} (RPE ${z?.rpe ?? ''})`;
+		return `${block.duration}; ${z?.name ?? block.zone} (RPE ${z?.rpe ?? ''})`;
 	}
 	// reps
 	const z = zoneLabels[block.zone];
 	const paceStr = block.pace ? ` @ ${block.pace}` : '';
-	return `${block.reps} × ${block.distance}${block.unit}${paceStr} — ${z?.name ?? block.zone} (RPE ${z?.rpe ?? ''}) | rest ${block.rest}`;
+	return `${block.reps} × ${block.distance}${block.unit}${paceStr}; ${z?.name ?? block.zone} (RPE ${z?.rpe ?? ''}); rest ${block.rest}`;
 }
 
 /** Validates that a session description has the required structure. */
