@@ -77,13 +77,8 @@ Table: `training_sessions`
 
 ### Zone Vocabulary
 
-| Zone    | Name         | RPE  |
-| ------- | ------------ | ---- |
-| `zone1` | Recovery     | 1–2  |
-| `zone2` | Aerobic      | 3–4  |
-| `zone3` | Steady State | 5–6  |
-| `zone4` | Threshold    | 7–8  |
-| `zone5` | VO2max       | 9–10 |
+Canonical zone names and RPE ranges are defined in `src/lib/types.ts` (`ZONE_LABELS`).
+For training science context (Daniels reference, physiology) see `docs/training-philosophy.md`.
 
 ### `description` JSONB Schema
 
@@ -149,3 +144,4 @@ VALUES (
 - `docs/vision.md` — project goals and non-goals
 - `docs/architecture.md` — layer diagram and technical decisions
 - `docs/agents.md` — agent workflow conventions for this repo
+- `docs/training-philosophy.md` — training science, zone definitions, methods, periodization, group structure
