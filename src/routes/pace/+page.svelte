@@ -1,159 +1,65 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import {
-		clampVDOT,
-		getZonePaces,
-		getRepetitionPaces,
-		bestVDOT,
-		formatPace,
-		parseTime,
-		REFERENCE_DISTANCES,
-		WORKOUT_DISTANCES
-	} from '$lib/domain/pace';
 	import { ZONE_LABELS } from '$lib/types';
 
-	const STORAGE_KEY = 'peakperformance:reference-times';
+	const zones = Object.entries(ZONE_LABELS) as [string, { name: string; rpe: string }][];
 
-	let inputs = $state<Record<string, string>>(
-		browser ? JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}') : {}
-	);
-
-	$effect(() => {
-		if (browser) localStorage.setItem(STORAGE_KEY, JSON.stringify(inputs));
-	});
-
-	const vdot = $derived.by(() => {
-		const performances = REFERENCE_DISTANCES.flatMap((d) => {
-			const raw = inputs[d.label];
-			if (!raw) return [];
-			const secs = parseTime(raw);
-			if (!secs || secs <= 0) return [];
-			return [{ distanceMeters: d.meters, timeSeconds: secs }];
-		});
-		return bestVDOT(performances);
-	});
-
-	const vdotInt = $derived(vdot ? clampVDOT(vdot) : null);
-
-	const zonePaces = $derived(vdot ? getZonePaces(vdot) : null);
-	const repPaces = $derived(vdotInt ? getRepetitionPaces(vdotInt) : null);
-
-	const paceTable = $derived.by(() => {
-		if (!zonePaces) return null;
-		return zonePaces.map((zp) => ({
-			zone: zp.zone,
-			zoneLabel: ZONE_LABELS[zp.zone as keyof typeof ZONE_LABELS],
-			distances: WORKOUT_DISTANCES.map((d) => ({
-				label: d.label,
-				time: formatPace(zp.paceSecPerKm, d.meters)
-			}))
-		}));
-	});
+	const zoneColors: Record<string, string> = {
+		zone1: '#22c55e',
+		zone2: '#84cc16',
+		zone3: '#f59e0b',
+		zone4: '#f97316',
+		zone5: '#ef4444'
+	};
 </script>
 
 <div class="px-4 py-5">
-	<h1 class="mb-1 text-xl font-bold text-zinc-900 dark:text-white">Pace Calculator</h1>
-	<p class="mb-6 text-sm text-zinc-500">
-		Enter your current race times to calculate training paces (Jack Daniels VDOT).
-	</p>
-
-	<!-- Reference time inputs -->
-	<div class="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
-		{#each REFERENCE_DISTANCES as dist (dist.label)}
-			<div>
-				<label
-					for="ref-{dist.label}"
-					class="mb-1 block text-xs font-medium uppercase tracking-wide text-zinc-500"
-				>
-					{dist.label}
-				</label>
-				<input
-					id="ref-{dist.label}"
-					type="text"
-					placeholder="m:ss"
-					bind:value={inputs[dist.label]}
-					class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400
-						focus:border-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
-				/>
-			</div>
-		{/each}
+	<!-- VDOT Embed -->
+	<h1 class="mb-4 text-lg font-bold text-zinc-900 dark:text-white">Pace Calculator</h1>
+	<div class="mb-8 overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
+		<iframe
+			src="https://vdoto2.com/calculator/embed"
+			width="100%"
+			height="1600"
+			frameborder="0"
+			title="VDOT Pace Calculator"
+		></iframe>
 	</div>
 
-	{#if vdotInt}
-		<p class="mb-4 text-sm text-zinc-500">
-			VDOT: <span class="font-semibold text-zinc-800 dark:text-zinc-200">{vdotInt}</span>
-		</p>
-	{/if}
-
-	{#if paceTable}
-		<!-- Zone pace table -->
-		<div class="mb-4 overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-700">
-			<table class="min-w-full text-sm">
-				<thead class="bg-zinc-50 dark:bg-zinc-800">
-					<tr>
-						<th
-							class="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500"
-							>Zone</th
-						>
-						{#each WORKOUT_DISTANCES as d (d.label)}
-							<th
-								class="px-3 py-2.5 text-center text-xs font-semibold uppercase tracking-wide text-zinc-500"
-								>{d.label}</th
-							>
-						{/each}
+	<!-- Zone / RPE Tabelle -->
+	<h2 class="mb-3 text-base font-semibold text-zinc-900 dark:text-white">Zonen & RPE</h2>
+	<div class="overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
+		<table class="min-w-full text-sm">
+			<thead>
+				<tr class="bg-zinc-50 dark:bg-zinc-800">
+					<th class="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500">Zone</th>
+					<th class="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500">Name</th>
+					<th class="px-3 py-2.5 text-center text-xs font-semibold uppercase tracking-wide text-zinc-500">RPE</th>
+					<th class="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500">Daniels</th>
+				</tr>
+			</thead>
+			<tbody class="divide-y divide-zinc-100 dark:divide-zinc-800">
+				{#each zones as [key, z], i (key)}
+					<tr class="hover:bg-zinc-50 dark:hover:bg-zinc-900">
+						<td class="px-3 py-2.5">
+							<span class="inline-flex items-center gap-1.5">
+								<span class="h-2.5 w-2.5 flex-shrink-0 rounded-full" style="background:{zoneColors[key]}"></span>
+								<span class="font-mono text-xs font-medium text-zinc-500">Z{i + 1}</span>
+							</span>
+						</td>
+						<td class="px-3 py-2.5 font-medium text-zinc-800 dark:text-zinc-200">{z.name}</td>
+						<td class="px-3 py-2.5 text-center">
+							<span class="rounded-full px-2 py-0.5 text-xs font-semibold"
+								style="background:{zoneColors[key]}22; color:{zoneColors[key]}">
+								{z.rpe}
+							</span>
+						</td>
+						<td class="px-3 py-2.5 text-xs text-zinc-400">
+							{#if key === 'zone1'}E{:else if key === 'zone2'}M{:else if key === 'zone3'}T{:else if key === 'zone4'}I{:else if key === 'zone5'}R{/if}
+						</td>
 					</tr>
-				</thead>
-				<tbody class="divide-y divide-zinc-100 dark:divide-zinc-800">
-					{#each paceTable as row (row.zone)}
-						<tr class="hover:bg-zinc-50 dark:hover:bg-zinc-900">
-							<td class="whitespace-nowrap px-3 py-2.5">
-								<span class="font-medium text-zinc-800 dark:text-zinc-200"
-									>{row.zoneLabel.name}</span
-								>
-								<span class="ml-1.5 text-xs text-zinc-400">RPE {row.zoneLabel.rpe}</span>
-							</td>
-							{#each row.distances as cell (`${row.zone}-${cell.label}`)}
-								<td
-									class="px-3 py-2.5 text-center font-mono text-xs text-zinc-700 dark:text-zinc-300"
-								>
-									{cell.time}
-								</td>
-							{/each}
-						</tr>
-					{/each}
-					{#if repPaces && (repPaces.rep200m || repPaces.rep400m)}
-						<tr class="hover:bg-zinc-50 dark:hover:bg-zinc-900">
-							<td class="whitespace-nowrap px-3 py-2.5">
-								<span class="font-medium text-zinc-800 dark:text-zinc-200">Speed</span>
-								<span class="ml-1.5 text-xs text-zinc-400">Rep</span>
-							</td>
-							{#each WORKOUT_DISTANCES as d (d.label)}
-								<td
-									class="px-3 py-2.5 text-center font-mono text-xs text-zinc-700 dark:text-zinc-300"
-								>
-									{d.label === '200m'
-										? (repPaces.rep200m ?? '—')
-										: d.label === '400m'
-											? (repPaces.rep400m ?? '—')
-											: '—'}
-								</td>
-							{/each}
-						</tr>
-					{/if}
-				</tbody>
-			</table>
-		</div>
-
-		<p class="mt-3 text-xs text-zinc-400">
-			Times shown per distance. For distances ≥ 1k: min:sec/km.
-		</p>
-	{:else}
-		<div
-			class="rounded-xl border border-dashed border-zinc-300 py-12 text-center dark:border-zinc-700"
-		>
-			<p class="text-sm text-zinc-400">
-				Enter at least one reference time to see your training paces.
-			</p>
-		</div>
-	{/if}
+				{/each}
+			</tbody>
+		</table>
+	</div>
+	<p class="mt-2 text-xs text-zinc-400">RPE 1–10 · LT1 ≈ RPE 3–4 · LT2 ≈ RPE 6–7</p>
 </div>
