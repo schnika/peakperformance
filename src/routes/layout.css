@@ -1,1 +1,10 @@
 @import 'tailwindcss';
+
+:root {
+	--komet-black: #000000;
+	--komet-dark: #54595f;
+	--komet-muted: #7a7a7a;
+	--komet-brown: #583319;
+	--komet-gold: #de8e2d;
+	--komet-white: #ffffff;
+}

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 132" role="img" aria-label="FTSV Komet Blankenese Logo">
+  <title>FTSV Komet Blankenese</title>
+
+  <!-- Outer diamond outline -->
+  <polygon points="110,4 216,66 110,128 4,66" fill="white" stroke="#583319" stroke-width="3.5"/>
+
+  <!-- Inner brown band (mid section of diamond) -->
+  <polygon points="110,30 190,66 110,102 30,66" fill="#583319"/>
+
+  <!-- Shooting star: comet tail (wavy ribbon) -->
+  <path d="M58,62 Q75,52 95,60 Q115,68 135,58 Q155,50 168,60 L165,68 Q152,58 132,66 Q112,76 92,68 Q72,60 58,70 Z"
+        fill="white"/>
+  <!-- Zigzag tail end -->
+  <path d="M163,58 L172,54 L168,62 L177,58 L173,66 L168,63"
+        fill="white" stroke="white" stroke-width="1" stroke-linejoin="round"/>
+
+  <!-- Star (5-pointed, white) -->
+  <polygon points="68,55 70.4,62.1 78,62.1 72,66.5 74.4,73.6 68,69.2 61.6,73.6 64,66.5 58,62.1 65.6,62.1"
+           fill="white"/>
+
+  <!-- Text path definitions -->
+  <defs>
+    <path id="topArc"    d="M 38,66 A 72,72 0 0,1 182,66"/>
+    <path id="bottomArc" d="M 26,72 A 88,88 0 0,0 194,72"/>
+  </defs>
+
+  <!-- KOMET top -->
+  <text font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700"
+        fill="#583319" letter-spacing="6">
+    <textPath href="#topArc" startOffset="18%">KOMET</textPath>
+  </text>
+
+  <!-- BLANKENESE bottom -->
+  <text font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700"
+        fill="#583319" letter-spacing="3.5">
+    <textPath href="#bottomArc" startOffset="8%">BLANKENESE</textPath>
+  </text>
+</svg>

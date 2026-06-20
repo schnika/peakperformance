@@ -136,8 +136,8 @@
 	<div class="grid grid-cols-7 gap-px bg-zinc-200 dark:bg-zinc-800">
 		{#each calendarDays as cell, i (cell.date ?? i)}
 			<div
-				class="min-h-[80px] bg-white p-1 dark:bg-zinc-950
-					{cell.date === today ? 'ring-2 ring-inset ring-zinc-900 dark:ring-zinc-100' : ''}"
+				class="min-h-[80px] bg-white p-1 dark:bg-zinc-950"
+					style={cell.date === today ? 'box-shadow: inset 0 0 0 2px var(--komet-gold);' : ''}
 			>
 				{#if cell.day !== null}
 					<span class="mb-1 block text-xs font-medium text-zinc-400 dark:text-zinc-500">
@@ -224,8 +224,9 @@
 						onclick={() => (selectedVariationIndex = null)}
 						class="flex-shrink-0 border-b-2 px-3 py-2 text-xs font-medium transition-colors
 							{selectedVariationIndex === null
-							? 'border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100'
+							? 'border-transparent'
 							: 'border-transparent text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}"
+						style={selectedVariationIndex === null ? 'border-bottom-color: var(--komet-brown); color: var(--komet-brown);' : ''}
 					>
 						Base
 					</button>
@@ -234,8 +235,9 @@
 							onclick={() => (selectedVariationIndex = i)}
 							class="flex-shrink-0 border-b-2 px-3 py-2 text-xs font-medium transition-colors
 								{selectedVariationIndex === i
-								? 'border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100'
+								? 'border-transparent'
 								: 'border-transparent text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}"
+							style={selectedVariationIndex === i ? 'border-bottom-color: var(--komet-brown); color: var(--komet-brown);' : ''}
 						>
 							{variation.label}
 						</button>
