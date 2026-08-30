@@ -2,10 +2,13 @@
 -- Block 1: Wochen 1-5, Mo 31.08.2026 bis Sa 03.10.2026
 -- description = Basis Gruppe B; variations = Gruppe A, Marathon, Mittelstrecke
 --
--- Erneutes Laden: erst die Zeilen im Zeitraum entfernen.
--- DELETE FROM training_sessions WHERE date BETWEEN '2026-08-31' AND '2026-10-03';
+-- Neuaufbau: dieser Seed raeumt selbst auf. Reihenfolge ist erst 0001, dann 0002.
+-- Das DELETE unten entfernt ALLES ab dem 31.08.2026, also auch die Fuelltage aus 0002.
+-- Wer 0001 allein laufen laesst, verliert die Sessions aus 0002 und muss sie neu laden.
 
 BEGIN;
+
+DELETE FROM training_sessions WHERE date >= '2026-08-31';
 
 INSERT INTO training_sessions (date, title, type, priority, description, notes, variations) VALUES
   ('2026-08-31', 'Reintegration: Lauf-ABC und Steigerungen', 'easy', 2,

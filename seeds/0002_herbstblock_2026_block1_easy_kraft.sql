@@ -3,10 +3,12 @@
 -- description = Basis Gruppe B; variations = Gruppe A, Marathon, Mittelstrecke
 -- Kraft liegt in den notes der Di/Fr-Laeufe. Frequenz 1-1-2-2-1 ueber die fuenf Wochen.
 --
--- Erneutes Laden: erst die Zeilen im Zeitraum entfernen.
--- DELETE FROM training_sessions WHERE date BETWEEN '2026-09-01' AND '2026-09-30' AND title LIKE 'Lockerer Lauf%';
+-- Neuaufbau: laeuft nach 0001, siehe dort zur Reihenfolge.
+-- Das DELETE unten trifft nur die eigenen Fuelltage, nicht die Mo/Do/Sa-Sessions aus 0001.
 
 BEGIN;
+
+DELETE FROM training_sessions WHERE date BETWEEN '2026-09-01' AND '2026-09-30' AND title LIKE 'Lockerer Lauf%';
 
 INSERT INTO training_sessions (date, title, type, priority, description, notes, variations) VALUES
   ('2026-09-01', 'Lockerer Lauf + Kraft', 'easy', 2,

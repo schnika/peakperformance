@@ -237,7 +237,9 @@ Plans are loaded via versioned SQL seeds in `seeds/`, not by hand. Convention:
 - Time-based interval sets encode one pattern in `blocks` and the repeat count in the set
   `label` (e.g. `"Satz 1: 10× [30 s zügig / 30 s traben]"`), because the block schema has
   no n×duration form. Distance-based reps use the `reps` block properly.
-- Each file starts with a commented `DELETE` for its own date range so it can be re-run
+- Each file opens its transaction with an **active** `DELETE`, so re-running it is safe.
+  `0001` clears everything from the block start date onwards, `0002` clears only its own
+  filler days. Reload order is therefore always `0001` first, then `0002`.
 
 **Schema drift to fix:** `variations` exists in `src/lib/server/db/schema.ts` but not in
 `drizzle/0000_awesome_cardiac.sql` — it was added via `db:push` without a migration.
