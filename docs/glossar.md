@@ -20,6 +20,7 @@ Verbindliche Begriffe und Regeln für Titel, Notes und Block-Beschreibungen.
 | Konzept                            | Titel                                  |
 | ---------------------------------- | -------------------------------------- |
 | Lockeres Laufen                    | Lockerer Lauf                          |
+| Lockeres Laufen mit Krafteinheit   | Lockerer Lauf + Kraft                  |
 | Hügelsprints                       | Hillreps                               |
 | 10-20-30 Einheit                   | 10-20-30                               |
 | Langer Lauf mit Steigerung am Ende | Langer Lauf (progressiv)               |
@@ -55,8 +56,14 @@ Verbindliche Begriffe und Regeln für Titel, Notes und Block-Beschreibungen.
 
 ## Verpflegung
 
-Ab **45 min Trainingszeit** (betrifft v.a. Mo, Do und Sa) gilt:
-
 > Ab Minute 30 auf kohlenhydratreiche Energiezufuhr achten — Gel, Riegel oder isotonisches Getränk.
 
-Dieser Hinweis gehört in die `notes` aller Sessions mit einer Gesamtdauer ≥ 45 min (Warm-up + Hauptteil + Cool-down).
+Dieser Hinweis gehört in die `notes`
+
+- aller Qualitäts- und Longrun-Einheiten (Mo, Do, Sa) ab **45 min** Gesamtdauer,
+- sowie jeder Einheit ab **75 min** Gesamtdauer, unabhängig vom Wochentag.
+
+Gesamtdauer heißt Warm-up + Hauptteil + Cool-down.
+
+Lockere zone1-Füllläufe unter 75 min bekommen den Hinweis **nicht** — dort untergräbt die
+Zufuhr genau die Fettoxidation, für die der Lauf da ist.
