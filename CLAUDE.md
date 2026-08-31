@@ -112,6 +112,21 @@ Block types:
 - `reps`: `{ "type": "reps", "reps": <n>, "distance": <n>, "unit": "m"|"km", "zone": "<zone>", "pace": "<optional>", "rest": "<time>" }`
 - `rest`: `{ "type": "rest", "duration": "<time>" }`
 
+## Session Language & Style
+
+Athlete-facing text in the database (`title`, `notes`, block descriptions) is **German** and
+must read like a coach wrote it, not a machine. Binding rules live in `docs/glossar.md`; the
+two that get violated most often:
+
+- **No em dashes (—).** Use a full stop and two short sentences instead of one long sentence
+  with an inserted clause. Range dashes (`2–3 Sätze`, `RPE 6–7`) are fine.
+- **No trailing contrast explanations** of the form "X, nicht Y" / "X, kein Y". Say what to do
+  directly. Instead of `Leicht — das ist die dritte Krafteinheit der Woche, kein zweiter
+schwerer Tag.` write `Dritte Krafteinheit der Woche. Das soll kein hartes Training werden,
+sondern beim Aufbau helfen.`
+
+Both patterns read as AI-generated to the coach. The group reads these notes in the app.
+
 ## Creating Sessions via Neon MCP
 
 Use the Neon MCP server to insert sessions directly. Example:

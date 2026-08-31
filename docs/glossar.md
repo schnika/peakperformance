@@ -36,6 +36,13 @@ Verbindliche Begriffe und Regeln für Titel, Notes und Block-Beschreibungen.
 - Kein „Hausaufgabe" — entfällt kommentarlos
 - Kein „Gruppentraining" — entfällt kommentarlos
 - Trennzeichen in Block-Beschreibungen: `;`
+- **Keine Gedankenstriche (—)** in Titeln, Notes und Block-Beschreibungen. Lieber ein Punkt
+  und zwei kurze Sätze als ein langer Satz mit Einschub.
+- **Keine nachgeschobenen Kontrast-Erklärungen** der Form „X, nicht Y" oder „X, kein Y".
+  Schreib direkt, was zu tun ist. Statt „Leicht — das ist die dritte Krafteinheit der Woche,
+  kein zweiter schwerer Tag." besser „Dritte Krafteinheit der Woche. Das soll kein hartes
+  Training werden, sondern beim Aufbau helfen."
+- Bis-Striche in Bereichen (`2–3 Sätze`, `RPE 6–7`) sind davon nicht betroffen.
 
 ## Pausen
 
@@ -56,7 +63,7 @@ Verbindliche Begriffe und Regeln für Titel, Notes und Block-Beschreibungen.
 
 ## Verpflegung
 
-> Ab Minute 30 auf kohlenhydratreiche Energiezufuhr achten — Gel, Riegel oder isotonisches Getränk.
+> Ab Minute 30 auf kohlenhydratreiche Energiezufuhr achten. Gel, Riegel oder isotonisches Getränk.
 
 Dieser Hinweis gehört in die `notes`
 
@@ -65,5 +72,5 @@ Dieser Hinweis gehört in die `notes`
 
 Gesamtdauer heißt Warm-up + Hauptteil + Cool-down.
 
-Lockere zone1-Füllläufe unter 75 min bekommen den Hinweis **nicht** — dort untergräbt die
+Lockere zone1-Füllläufe unter 75 min bekommen den Hinweis **nicht**. Dort untergräbt die
 Zufuhr genau die Fettoxidation, für die der Lauf da ist.
