@@ -161,11 +161,18 @@ four parallel plans made every session four times the work to write and review, 
 that trains together. Stronger runners scale the base plan through effort and long-run
 distance instead.
 
-**Construction rule:** Thursday carries **no variant at all**. The seed leaves `variations`
-empty there and everyone runs the base session. The evening is self-organized and one person
-calls the times for the whole group, so two different rep counts on the same loop would mean
-running two schedules at once. Variant-specific work lives exclusively in **Monday and the
-long run**.
+**Construction rule:** Variant-specific work always lives in **Monday and the long run**.
+The easy filler days (Tue, Wed, Fri, Sun) never differentiate; a variant there buys nothing but
+a second tab saying five minutes more.
+
+Thursday depends on the phase:
+
+- **Accumulation** — same session for everyone, `variations` stays empty. The evening is
+  self-organized and one person calls the times for the group, so two rep counts on the same
+  loop would mean running two schedules at once. Autumn 2026 block 1 is built this way.
+- **Transmutation and realization** — Thursday may differ substantially. Once the work turns
+  race-specific, 1500 m and 5 km stop wanting the same session, and that is worth the extra
+  coordination. Plan the coach to attend those evenings rather than sending a voice message.
 
 ---
 
@@ -235,7 +242,9 @@ Plans are loaded via versioned SQL seeds in `seeds/`, not by hand. Convention:
 
 - One file per block: `seeds/<nnnn>_<block>_<part>.sql`
 - `description` holds the **Basis** version
-- `variations` holds exactly one entry, `Mittelstrecke`, and is empty on Thursdays
+- `variations` holds exactly one entry, `Mittelstrecke`, on the days that differentiate.
+  In the autumn 2026 accumulation block that is Monday and Saturday; later, more specific
+  blocks may differentiate Thursday as well. The filler days are always empty.
 - Titles and notes are in **German** — athletes read them in the app
 - Time-based interval sets encode one pattern in `blocks` and the repeat count in the set
   `label` (e.g. `"Satz 1: 10× [30 s zügig / 30 s traben]"`), because the block schema has
