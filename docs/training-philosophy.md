@@ -213,12 +213,10 @@ Easy days are deliberately zone1 — no moderate filler.
 | 2026-08-30    | Blankeneser Heldenlauf             | done — closed the VO2max block    |
 | 2026-10-05    | 3000 m test (Monday group session) | benchmark, sets paces for block 2 |
 | 2026-11-08    | Süderelbe-Lauf, Neugraben          | **autumn peak** — 5 km / HM       |
-| 2026-12-06    | Valencia Marathon                  | marathon athlete's main target    |
 | 2027-01 (TBC) | Bergedorfer Crosslauf, Doktorberg  | middle-distance peak — **hilly**  |
 | 2027-04       | Hamburg Marathon / HM + 5k/10k     | spring target                     |
 
-Süderelbe start times: HM 10:00, 10 km 10:15, 5 km 10:20. The half marathon sits exactly
-four weeks before Valencia and is run as a sharpening race without a real taper.
+Süderelbe start times: HM 10:00, 10 km 10:15, 5 km 10:20.
 
 The Bergedorf date is **not yet published** — expected in the first or second week of
 January 2027. The winter block is therefore planned backwards from race day; the buffer
@@ -230,9 +228,8 @@ Doktorberg and the course is hilly, which is why hills and strength form the win
 
 1. Aug 31 → Nov 8: autumn block, 10 weeks, 2 × 3:1 (see `claude/mesozyklus-herbst-2026.md`
    in the Claude project for the full plan)
-2. Nov 9 → Dec 6: marathon specific phase and taper for Valencia
-3. Nov → Jan: middle-distance winter — hill strength endurance, then cross-specific work
-4. Jan → Apr 2027: transmutation + realization → Hamburg
+2. Nov → Jan: middle-distance winter — hill strength endurance, then cross-specific work
+3. Jan → Apr 2027: transmutation + realization → Hamburg
 
 ---
 
