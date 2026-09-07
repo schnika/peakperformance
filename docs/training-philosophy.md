@@ -149,20 +149,22 @@ from hill loading typically surface in the third month, when the cause is no lon
 
 ## Training Groups
 
-Three plan variants share one weekly template.
+Two plan variants share one weekly template.
 
 | Variant           | Target                      | Weekly volume | Notes                        |
 | ----------------- | --------------------------- | ------------- | ---------------------------- |
-| **Basis B**       | 5 km (also 10 km)           | 34–48 km      | default group                |
-| **Basis A**       | 5 km (also 10 km)           | 42–58 km      | stronger runners             |
-| **Marathon**      | marathon                    | 50–86 km      | currently one athlete        |
+| **Basis**         | 5 km (also 10 km)           | 34–48 km      | default group                |
 | **Mittelstrecke** | 1500 / 3000 m, winter cross | 35–56 km      | year-round speed maintenance |
 
-**Construction rule:** Thursday is the same session for all variants, differing only in
+Earlier drafts carried separate **Basis A** and **Marathon** variants. Both were dropped:
+four parallel plans made every session four times the work to write and review, for a group
+that trains together. Stronger runners scale the base plan through effort and long-run
+distance instead.
+
+**Construction rule:** Thursday is the same session for both variants, differing only in
 warm-up/cool-down volume. Variant-specific work lives exclusively in **Monday and the long
 run**. This keeps the group together on the day with the least supervision and limits
-coaching overhead — the single marathon athlete needs her own Monday session exactly once
-in a ten-week block.
+coaching overhead.
 
 ---
 
@@ -231,8 +233,8 @@ Doktorberg and the course is hilly, which is why hills and strength form the win
 Plans are loaded via versioned SQL seeds in `seeds/`, not by hand. Convention:
 
 - One file per block: `seeds/<nnnn>_<block>_<part>.sql`
-- `description` holds the **Basis Gruppe B** version
-- `variations` holds `Gruppe A`, `Marathon`, `Mittelstrecke` in that order
+- `description` holds the **Basis** version
+- `variations` holds exactly one entry, `Mittelstrecke`
 - Titles and notes are in **German** — athletes read them in the app
 - Time-based interval sets encode one pattern in `blocks` and the repeat count in the set
   `label` (e.g. `"Satz 1: 10× [30 s zügig / 30 s traben]"`), because the block schema has
@@ -240,7 +242,3 @@ Plans are loaded via versioned SQL seeds in `seeds/`, not by hand. Convention:
 - Each file opens its transaction with an **active** `DELETE`, so re-running it is safe.
   `0001` clears everything from the block start date onwards, `0002` clears only its own
   filler days. Reload order is therefore always `0001` first, then `0002`.
-
-**Schema drift to fix:** `variations` exists in `src/lib/server/db/schema.ts` but not in
-`drizzle/0000_awesome_cardiac.sql` — it was added via `db:push` without a migration.
-Generate a migration so a fresh database matches production.
