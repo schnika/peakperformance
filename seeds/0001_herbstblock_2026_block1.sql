@@ -1,8 +1,8 @@
 -- Herbstblock 2026 - FTSV Komet Blankenese
 -- Block 1: Wochen 1-5, Mo 31.08.2026 bis Sa 03.10.2026
 -- description = Basis; variations = Mittelstrecke
--- Ausnahme: an den Donnerstagen 10.09., 17.09. und 24.09. gibt es keine Variante.
--- Dort trainiert die ganze Gruppe dieselbe Einheit.
+-- Ausnahme: donnerstags gibt es keine Variante. Dort trainiert die ganze Gruppe
+-- dieselbe Einheit, weil der Abend selbstorganisiert laeuft.
 --
 -- Neuaufbau: dieser Seed raeumt selbst auf. Reihenfolge ist erst 0001, dann 0002.
 -- Das DELETE unten entfernt ALLES ab dem 31.08.2026, also auch die Fuelltage aus 0002.
@@ -20,7 +20,7 @@ INSERT INTO training_sessions (date, title, type, priority, description, notes, 
   ('2026-09-03', 'Lockerer Dauerlauf mit Steigerungen', 'easy', 2,
    $j${"sets":[{"label":"Dauerlauf","blocks":[{"type":"duration","duration":"50min","zone":"zone1"},{"type":"reps","reps":8,"distance":100,"unit":"m","zone":"zone5","rest":"60s"}]}],"cooldown":{"duration":"5min","notes":"locker austraben"}}$j$::jsonb,
    'Gruppe läuft selbst. Steigerungen auf Gras. Ab Minute 30 auf kohlenhydratreiche Energiezufuhr achten. Gel, Riegel oder isotonisches Getränk.',
-   $j$[{"label":"Mittelstrecke","description":{"sets":[{"label":"Dauerlauf","blocks":[{"type":"duration","duration":"55min","zone":"zone1"},{"type":"reps","reps":8,"distance":100,"unit":"m","zone":"zone5","rest":"60s"}]}],"cooldown":{"duration":"5min","notes":"locker austraben"}}}]$j$::jsonb),
+   $j$[]$j$::jsonb),
   ('2026-09-05', 'Longrun', 'long', 2,
    $j${"sets":[{"label":"Langer Lauf","blocks":[{"type":"reps","reps":1,"distance":14,"unit":"km","zone":"zone1","rest":"0"}]}]}$j$::jsonb,
    'Komplett zone1. Ab Minute 30 auf kohlenhydratreiche Energiezufuhr achten. Gel, Riegel oder isotonisches Getränk.',
@@ -68,7 +68,7 @@ INSERT INTO training_sessions (date, title, type, priority, description, notes, 
   ('2026-10-01', 'Lockerer Dauerlauf mit Steigerungen', 'easy', 2,
    $j${"sets":[{"label":"Dauerlauf","blocks":[{"type":"duration","duration":"40min","zone":"zone1"},{"type":"reps","reps":6,"distance":100,"unit":"m","zone":"zone5","rest":"60s"}]}],"cooldown":{"duration":"5min","notes":"locker austraben"}}$j$::jsonb,
    'Nichts beweisen wollen. Wer sich gut fühlt, läuft trotzdem locker. Ab Minute 30 auf kohlenhydratreiche Energiezufuhr achten. Gel, Riegel oder isotonisches Getränk.',
-   $j$[{"label":"Mittelstrecke","description":{"sets":[{"label":"Dauerlauf","blocks":[{"type":"duration","duration":"40min","zone":"zone1"},{"type":"reps","reps":6,"distance":100,"unit":"m","zone":"zone5","rest":"60s"}]}],"cooldown":{"duration":"5min","notes":"locker austraben"}}}]$j$::jsonb),
+   $j$[]$j$::jsonb),
   ('2026-10-03', 'Longrun kurz', 'long', 2,
    $j${"sets":[{"label":"Langer Lauf","blocks":[{"type":"reps","reps":1,"distance":12,"unit":"km","zone":"zone1","rest":"0"}]}]}$j$::jsonb,
    'Verkürzt wegen Entlastung. Ab Minute 30 auf kohlenhydratreiche Energiezufuhr achten. Gel, Riegel oder isotonisches Getränk.',

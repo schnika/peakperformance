@@ -161,10 +161,11 @@ four parallel plans made every session four times the work to write and review, 
 that trains together. Stronger runners scale the base plan through effort and long-run
 distance instead.
 
-**Construction rule:** Thursday is the same session for both variants, differing only in
-warm-up/cool-down volume. Variant-specific work lives exclusively in **Monday and the long
-run**. This keeps the group together on the day with the least supervision and limits
-coaching overhead.
+**Construction rule:** Thursday carries **no variant at all**. The seed leaves `variations`
+empty there and everyone runs the base session. The evening is self-organized and one person
+calls the times for the whole group, so two different rep counts on the same loop would mean
+running two schedules at once. Variant-specific work lives exclusively in **Monday and the
+long run**.
 
 ---
 
@@ -234,7 +235,7 @@ Plans are loaded via versioned SQL seeds in `seeds/`, not by hand. Convention:
 
 - One file per block: `seeds/<nnnn>_<block>_<part>.sql`
 - `description` holds the **Basis** version
-- `variations` holds exactly one entry, `Mittelstrecke`
+- `variations` holds exactly one entry, `Mittelstrecke`, and is empty on Thursdays
 - Titles and notes are in **German** — athletes read them in the app
 - Time-based interval sets encode one pattern in `blocks` and the repeat count in the set
   `label` (e.g. `"Satz 1: 10× [30 s zügig / 30 s traben]"`), because the block schema has
