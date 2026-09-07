@@ -1,6 +1,8 @@
 -- Herbstblock 2026 - FTSV Komet Blankenese
 -- Block 1: Wochen 1-5, Mo 31.08.2026 bis Sa 03.10.2026
 -- description = Basis; variations = Mittelstrecke
+-- Ausnahme: an den Donnerstagen 10.09., 17.09. und 24.09. gibt es keine Variante.
+-- Dort trainiert die ganze Gruppe dieselbe Einheit.
 --
 -- Neuaufbau: dieser Seed raeumt selbst auf. Reihenfolge ist erst 0001, dann 0002.
 -- Das DELETE unten entfernt ALLES ab dem 31.08.2026, also auch die Fuelltage aus 0002.
@@ -30,7 +32,7 @@ INSERT INTO training_sessions (date, title, type, priority, description, notes, 
   ('2026-09-10', '10-20-30', 'interval', 1,
    $j${"warmup":{"duration":"15min","notes":"locker eintraben"},"sets":[{"label":"Block 1: 5× [30 s / 20 s / 10 s]","blocks":[{"type":"duration","duration":"30s","zone":"zone1"},{"type":"duration","duration":"20s","zone":"zone2"},{"type":"duration","duration":"10s","zone":"zone5"},{"type":"rest","duration":"2:00"}]},{"label":"Block 2: 5× [30 s / 20 s / 10 s]","blocks":[{"type":"duration","duration":"30s","zone":"zone1"},{"type":"duration","duration":"20s","zone":"zone2"},{"type":"duration","duration":"10s","zone":"zone5"},{"type":"rest","duration":"2:00"}]},{"label":"Block 3: 5× [30 s / 20 s / 10 s]","blocks":[{"type":"duration","duration":"30s","zone":"zone1"},{"type":"duration","duration":"20s","zone":"zone2"},{"type":"duration","duration":"10s","zone":"zone5"},{"type":"rest","duration":"2:00"}]}],"cooldown":{"duration":"10min","notes":"locker austraben"}}$j$::jsonb,
    'Die 30 s sind wirklich langsam, langsamer als Dauerlauftempo. Die 10 s schnell, aber nicht Vollgas.',
-   $j$[{"label":"Mittelstrecke","description":{"warmup":{"duration":"15min","notes":"locker eintraben"},"sets":[{"label":"Block 1: 5× [30 s / 20 s / 10 s]","blocks":[{"type":"duration","duration":"30s","zone":"zone1"},{"type":"duration","duration":"20s","zone":"zone2"},{"type":"duration","duration":"10s","zone":"zone5"},{"type":"rest","duration":"2:00"}]},{"label":"Block 2: 5× [30 s / 20 s / 10 s]","blocks":[{"type":"duration","duration":"30s","zone":"zone1"},{"type":"duration","duration":"20s","zone":"zone2"},{"type":"duration","duration":"10s","zone":"zone5"},{"type":"rest","duration":"2:00"}]},{"label":"Block 3: 5× [30 s / 20 s / 10 s]","blocks":[{"type":"duration","duration":"30s","zone":"zone1"},{"type":"duration","duration":"20s","zone":"zone2"},{"type":"duration","duration":"10s","zone":"zone5"},{"type":"rest","duration":"2:00"}]},{"label":"Block 4: 5× [30 s / 20 s / 10 s]","blocks":[{"type":"duration","duration":"30s","zone":"zone1"},{"type":"duration","duration":"20s","zone":"zone2"},{"type":"duration","duration":"10s","zone":"zone5"},{"type":"rest","duration":"2:00"}]}],"cooldown":{"duration":"10min","notes":"locker austraben"}}}]$j$::jsonb),
+   $j$[]$j$::jsonb),
   ('2026-09-12', 'Longrun', 'long', 2,
    $j${"sets":[{"label":"Langer Lauf","blocks":[{"type":"reps","reps":1,"distance":15,"unit":"km","zone":"zone1","rest":"0"}]}]}$j$::jsonb,
    'Ab Minute 30 auf kohlenhydratreiche Energiezufuhr achten. Gel, Riegel oder isotonisches Getränk.',
@@ -42,7 +44,7 @@ INSERT INTO training_sessions (date, title, type, priority, description, notes, 
   ('2026-09-17', '30 s zügig, lange Pause', 'interval', 1,
    $j${"warmup":{"duration":"15min","notes":"locker eintraben, Lauf-ABC"},"sets":[{"label":"8× 30 s zügig","blocks":[{"type":"duration","duration":"30s","zone":"zone5"},{"type":"rest","duration":"2:45"}]}],"cooldown":{"duration":"12min","notes":"locker austraben"}}$j$::jsonb,
    '1500-m-Tempo, nicht Vollgas. Die lange Pause ist der Zweck: die letzte Wiederholung soll aussehen wie die erste. Flache, gerade Strecke ohne Kurven.',
-   $j$[{"label":"Mittelstrecke","description":{"warmup":{"duration":"15min","notes":"locker eintraben, Lauf-ABC"},"sets":[{"label":"10× 30 s zügig","blocks":[{"type":"duration","duration":"30s","zone":"zone5"},{"type":"rest","duration":"2:45"}]}],"cooldown":{"duration":"12min","notes":"locker austraben"}},"notes":"Im 1500-m-Tempo. Für euch die wertvollste Donnerstagseinheit im Block."}]$j$::jsonb),
+   $j$[]$j$::jsonb),
   ('2026-09-19', 'Longrun', 'long', 2,
    $j${"sets":[{"label":"Langer Lauf","blocks":[{"type":"reps","reps":1,"distance":16,"unit":"km","zone":"zone1","rest":"0"}]}]}$j$::jsonb,
    'Ab Minute 30 auf kohlenhydratreiche Energiezufuhr achten. Gel, Riegel oder isotonisches Getränk.',
@@ -54,7 +56,7 @@ INSERT INTO training_sessions (date, title, type, priority, description, notes, 
   ('2026-09-24', '30/30', 'interval', 1,
    $j${"warmup":{"duration":"15min","notes":"locker eintraben, 4× 100 m Steigerungen"},"sets":[{"label":"Satz 1: 10× [30 s zügig / 30 s traben]","blocks":[{"type":"duration","duration":"30s","zone":"zone4"},{"type":"duration","duration":"30s","zone":"zone1"},{"type":"rest","duration":"3:00"}]},{"label":"Satz 2: 10× [30 s zügig / 30 s traben]","blocks":[{"type":"duration","duration":"30s","zone":"zone4"},{"type":"duration","duration":"30s","zone":"zone1"},{"type":"rest","duration":"3:00"}]}],"cooldown":{"duration":"12min","notes":"locker austraben"}}$j$::jsonb,
    'Die 30 s Pause werden getrabt, nicht gegangen. Daran hängt der Effekt. Zerfällt der zweite Satz, war der erste zu schnell.',
-   $j$[{"label":"Mittelstrecke","description":{"warmup":{"duration":"15min","notes":"locker eintraben, 4× 100 m Steigerungen"},"sets":[{"label":"Satz 1: 12× [30 s zügig / 30 s traben]","blocks":[{"type":"duration","duration":"30s","zone":"zone4"},{"type":"duration","duration":"30s","zone":"zone1"},{"type":"rest","duration":"3:00"}]},{"label":"Satz 2: 12× [30 s zügig / 30 s traben]","blocks":[{"type":"duration","duration":"30s","zone":"zone4"},{"type":"duration","duration":"30s","zone":"zone1"},{"type":"rest","duration":"3:00"}]}],"cooldown":{"duration":"12min","notes":"locker austraben"}}}]$j$::jsonb),
+   $j$[]$j$::jsonb),
   ('2026-09-26', 'Longrun mit progressivem Abschluss', 'long', 2,
    $j${"sets":[{"label":"Langer Lauf","blocks":[{"type":"reps","reps":1,"distance":14,"unit":"km","zone":"zone1","rest":"0"},{"type":"reps","reps":1,"distance":3,"unit":"km","zone":"zone2","rest":"0"}]}]}$j$::jsonb,
    'Letzte Kilometer zügig, aber fließend reinlaufen. Ab Minute 30 auf kohlenhydratreiche Energiezufuhr achten. Gel, Riegel oder isotonisches Getränk.',
