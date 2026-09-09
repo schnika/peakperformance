@@ -149,20 +149,30 @@ from hill loading typically surface in the third month, when the cause is no lon
 
 ## Training Groups
 
-Three plan variants share one weekly template.
+Two plan variants share one weekly template.
 
 | Variant           | Target                      | Weekly volume | Notes                        |
 | ----------------- | --------------------------- | ------------- | ---------------------------- |
-| **Basis B**       | 5 km (also 10 km)           | 34–48 km      | default group                |
-| **Basis A**       | 5 km (also 10 km)           | 42–58 km      | stronger runners             |
-| **Marathon**      | marathon                    | 50–86 km      | currently one athlete        |
+| **Basis**         | 5 km (also 10 km)           | 34–48 km      | default group                |
 | **Mittelstrecke** | 1500 / 3000 m, winter cross | 35–56 km      | year-round speed maintenance |
 
-**Construction rule:** Thursday is the same session for all variants, differing only in
-warm-up/cool-down volume. Variant-specific work lives exclusively in **Monday and the long
-run**. This keeps the group together on the day with the least supervision and limits
-coaching overhead — the single marathon athlete needs her own Monday session exactly once
-in a ten-week block.
+Earlier drafts carried separate **Basis A** and **Marathon** variants. Both were dropped:
+four parallel plans made every session four times the work to write and review, for a group
+that trains together. Stronger runners scale the base plan through effort and long-run
+distance instead.
+
+**Construction rule:** Variant-specific work always lives in **Monday and the long run**.
+The easy filler days (Tue, Wed, Fri, Sun) never differentiate; a variant there buys nothing but
+a second tab saying five minutes more.
+
+Thursday depends on the phase:
+
+- **Accumulation** — same session for everyone, `variations` stays empty. The evening is
+  self-organized and one person calls the times for the group, so two rep counts on the same
+  loop would mean running two schedules at once. Autumn 2026 block 1 is built this way.
+- **Transmutation and realization** — Thursday may differ substantially. Once the work turns
+  race-specific, 1500 m and 5 km stop wanting the same session, and that is worth the extra
+  coordination. Plan the coach to attend those evenings rather than sending a voice message.
 
 ---
 
@@ -203,12 +213,10 @@ Easy days are deliberately zone1 — no moderate filler.
 | 2026-08-30    | Blankeneser Heldenlauf             | done — closed the VO2max block    |
 | 2026-10-05    | 3000 m test (Monday group session) | benchmark, sets paces for block 2 |
 | 2026-11-08    | Süderelbe-Lauf, Neugraben          | **autumn peak** — 5 km / HM       |
-| 2026-12-06    | Valencia Marathon                  | marathon athlete's main target    |
 | 2027-01 (TBC) | Bergedorfer Crosslauf, Doktorberg  | middle-distance peak — **hilly**  |
 | 2027-04       | Hamburg Marathon / HM + 5k/10k     | spring target                     |
 
-Süderelbe start times: HM 10:00, 10 km 10:15, 5 km 10:20. The half marathon sits exactly
-four weeks before Valencia and is run as a sharpening race without a real taper.
+Süderelbe start times: HM 10:00, 10 km 10:15, 5 km 10:20.
 
 The Bergedorf date is **not yet published** — expected in the first or second week of
 January 2027. The winter block is therefore planned backwards from race day; the buffer
@@ -220,9 +228,8 @@ Doktorberg and the course is hilly, which is why hills and strength form the win
 
 1. Aug 31 → Nov 8: autumn block, 10 weeks, 2 × 3:1 (see `claude/mesozyklus-herbst-2026.md`
    in the Claude project for the full plan)
-2. Nov 9 → Dec 6: marathon specific phase and taper for Valencia
-3. Nov → Jan: middle-distance winter — hill strength endurance, then cross-specific work
-4. Jan → Apr 2027: transmutation + realization → Hamburg
+2. Nov → Jan: middle-distance winter — hill strength endurance, then cross-specific work
+3. Jan → Apr 2027: transmutation + realization → Hamburg
 
 ---
 
@@ -231,8 +238,10 @@ Doktorberg and the course is hilly, which is why hills and strength form the win
 Plans are loaded via versioned SQL seeds in `seeds/`, not by hand. Convention:
 
 - One file per block: `seeds/<nnnn>_<block>_<part>.sql`
-- `description` holds the **Basis Gruppe B** version
-- `variations` holds `Gruppe A`, `Marathon`, `Mittelstrecke` in that order
+- `description` holds the **Basis** version
+- `variations` holds exactly one entry, `Mittelstrecke`, on the days that differentiate.
+  In the autumn 2026 accumulation block that is Monday and Saturday; later, more specific
+  blocks may differentiate Thursday as well. The filler days are always empty.
 - Titles and notes are in **German** — athletes read them in the app
 - Time-based interval sets encode one pattern in `blocks` and the repeat count in the set
   `label` (e.g. `"Satz 1: 10× [30 s zügig / 30 s traben]"`), because the block schema has
@@ -240,7 +249,3 @@ Plans are loaded via versioned SQL seeds in `seeds/`, not by hand. Convention:
 - Each file opens its transaction with an **active** `DELETE`, so re-running it is safe.
   `0001` clears everything from the block start date onwards, `0002` clears only its own
   filler days. Reload order is therefore always `0001` first, then `0002`.
-
-**Schema drift to fix:** `variations` exists in `src/lib/server/db/schema.ts` but not in
-`drizzle/0000_awesome_cardiac.sql` — it was added via `db:push` without a migration.
-Generate a migration so a fresh database matches production.
