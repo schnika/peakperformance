@@ -238,7 +238,7 @@
 					>
 						Base
 					</button>
-					{#each selectedSession.variations as variation, i (variation.label)}
+					{#each selectedSession.variations as variation, i (i)}
 						<button
 							onclick={() => (selectedVariationIndex = i)}
 							class="flex-shrink-0 border-b-2 px-3 py-2 text-xs font-medium transition-colors
@@ -293,7 +293,7 @@
 					</div>
 				{/if}
 
-				{#each activeDesc.sets as set (set.label)}
+				{#each activeDesc.sets as set, setIndex (setIndex)}
 					<div>
 						<h3 class="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-400">
 							{set.label}
